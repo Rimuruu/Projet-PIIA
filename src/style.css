@@ -4,6 +4,10 @@
     -fx-background: black ;
 }
 
+.menu {
+	-fx-padding: 10 10 10 10;
+}
+
 .menu-item .label{
     -fx-text-fill: white;
 
@@ -11,6 +15,7 @@
 
 .menu-item{
     -fx-background: black ;
+    
 }
 
 .context-menu {

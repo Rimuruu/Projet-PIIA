@@ -23,11 +23,18 @@ import javafx.scene.paint.Color;
 import java.time.Instant;
 
 public class MainBar extends HBox {
-	Label filename;
+	public Label filename;
+	public MenuBar menuBar;
+	public MenuItem menuItem5;
+	public MenuItem menuItem2;
+	public MenuItem menuItem41;
+	public MenuItem menuItem42;
+	public MenuItem menuItem43;
 	public MainBar() {
 		
-		MenuBar menuBar = new MenuBar();
-	
+		menuBar = new MenuBar();
+		
+		
 
 		Menu menu1 = new Menu("Fichier");
 		Menu menu2 = new Menu("Édition");
@@ -35,17 +42,17 @@ public class MainBar extends HBox {
 		Menu menu4 = new Menu("Affichage");
 		Menu menu5 = new Menu("Outils");
 		Menu menu6 = new Menu("Aide");
-		this.filename = new Label("filename");
-
+		this.filename = new Label();
+		filename.setPadding(new Insets(10, 10, 10, 10));
 		HBox labelbox = new HBox(this.filename);
 		labelbox.setAlignment(Pos.CENTER_RIGHT);
 
 		
 		MenuItem menuItem1 = new MenuItem("Nouveau");
-		MenuItem menuItem2 = new MenuItem("Ouvrir");
+		menuItem2 = new MenuItem("Ouvrir");
 		MenuItem menuItem3 = new MenuItem("Enregistrer");
 		MenuItem menuItem4 = new MenuItem("Enregistrer sous");
-		MenuItem menuItem5 = new MenuItem("Quitter");
+		menuItem5 = new MenuItem("Quitter");
 		
 		MenuItem menuItem21 = new MenuItem("Copier");
 		MenuItem menuItem22 = new MenuItem("Couper");
@@ -59,9 +66,9 @@ public class MainBar extends HBox {
 		MenuItem menuItem32 = new MenuItem("Mettre en avant");
 		MenuItem menuItem33 = new MenuItem("Mettre en arrière");
 		
-		MenuItem menuItem41 = new MenuItem("Zoom avant");
-		MenuItem menuItem42 = new MenuItem("Zoom arrière");
-		MenuItem menuItem43 = new MenuItem("Restaurer le Zoom par défaut");
+		menuItem41 = new MenuItem("Zoom avant");
+		menuItem42 = new MenuItem("Zoom arrière");
+		menuItem43 = new MenuItem("Restaurer le Zoom par défaut");
 		
 		MenuItem menuItem51 = new MenuItem("Filtre");
 		MenuItem menuItem52 = new MenuItem("Texte");
@@ -120,7 +127,6 @@ public class MainBar extends HBox {
 		menuBar.getMenus().add(menu5);
 		menuBar.getMenus().add(menu6);
 		menuBar.setBackground(Background.EMPTY);
-		
 		this.getChildren().addAll(menuBar,labelbox);
 		this.setHgrow(labelbox, Priority.ALWAYS);
 		this.setBackground(new Background(new BackgroundFill(Color.web("7A1D76"),CornerRadii.EMPTY, Insets.EMPTY)));
