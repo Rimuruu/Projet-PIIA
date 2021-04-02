@@ -1,35 +1,28 @@
 package view;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-
-import java.time.Instant;
 
 public class MainBar extends HBox {
 	public Label filename;
 	public MenuBar menuBar;
 	public MenuItem menuItem5;
 	public MenuItem menuItem2;
+	public MenuItem menuItem4;
 	public MenuItem menuItem41;
 	public MenuItem menuItem42;
 	public MenuItem menuItem43;
+	public MenuItem menuItem3;
 	public MainBar() {
 		
 		menuBar = new MenuBar();
@@ -50,8 +43,8 @@ public class MainBar extends HBox {
 		
 		MenuItem menuItem1 = new MenuItem("Nouveau");
 		menuItem2 = new MenuItem("Ouvrir");
-		MenuItem menuItem3 = new MenuItem("Enregistrer");
-		MenuItem menuItem4 = new MenuItem("Enregistrer sous");
+		menuItem3 = new MenuItem("Enregistrer");
+		menuItem4 = new MenuItem("Enregistrer sous");
 		menuItem5 = new MenuItem("Quitter");
 		
 		MenuItem menuItem21 = new MenuItem("Copier");
