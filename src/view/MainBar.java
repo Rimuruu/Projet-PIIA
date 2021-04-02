@@ -12,6 +12,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
+import model.AppContext;
 
 public class MainBar extends HBox {
 	public Label filename;
@@ -23,6 +24,9 @@ public class MainBar extends HBox {
 	public MenuItem menuItem42;
 	public MenuItem menuItem43;
 	public MenuItem menuItem3;
+	public MenuItem menuItem1;
+	public MenuItem menuItemForme3;
+	public MenuItem menuItemForme1;
 	public MainBar() {
 		
 		menuBar = new MenuBar();
@@ -41,7 +45,7 @@ public class MainBar extends HBox {
 		labelbox.setAlignment(Pos.CENTER_RIGHT);
 
 		
-		MenuItem menuItem1 = new MenuItem("Nouveau");
+		menuItem1 = new MenuItem("Nouveau");
 		menuItem2 = new MenuItem("Ouvrir");
 		menuItem3 = new MenuItem("Enregistrer");
 		menuItem4 = new MenuItem("Enregistrer sous");
@@ -71,9 +75,9 @@ public class MainBar extends HBox {
 		MenuItem menuItem61 = new MenuItem("Documentation");
 		MenuItem menuItem62 = new MenuItem("Crédit");
 
-		MenuItem menuItemForme1 = new MenuItem("Carré");
+		menuItemForme1 = new MenuItem("Carré");
 		MenuItem menuItemForme2 = new MenuItem("Triangle");
-		MenuItem menuItemForme3 = new MenuItem("Ovale");
+		menuItemForme3 = new MenuItem("Ovale");
 		MenuItem menuItemForme4 = new MenuItem("Étoile");
 		
 		menuItem53.getItems().add(menuItemForme1);
@@ -124,6 +128,10 @@ public class MainBar extends HBox {
 		this.setHgrow(labelbox, Priority.ALWAYS);
 		this.setBackground(new Background(new BackgroundFill(Color.web("7A1D76"),CornerRadii.EMPTY, Insets.EMPTY)));
 
+	}
+	
+	public void updateContext(AppContext app){
+		this.filename.setText(app.file.getName());
 	}
 
 }
