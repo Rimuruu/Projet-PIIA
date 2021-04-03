@@ -27,6 +27,10 @@ public class MainBar extends HBox {
 	public MenuItem menuItem1;
 	public MenuItem menuItemForme3;
 	public MenuItem menuItemForme1;
+	public MenuItem menuItem52;
+	public MenuItem menuItem21;
+	public MenuItem menuItem22;
+	public MenuItem menuItem23;
 	public MainBar() {
 		
 		menuBar = new MenuBar();
@@ -51,9 +55,9 @@ public class MainBar extends HBox {
 		menuItem4 = new MenuItem("Enregistrer sous");
 		menuItem5 = new MenuItem("Quitter");
 		
-		MenuItem menuItem21 = new MenuItem("Copier");
-		MenuItem menuItem22 = new MenuItem("Couper");
-		MenuItem menuItem23 = new MenuItem("Coller");
+		menuItem21 = new MenuItem("Copier");
+		menuItem22 = new MenuItem("Couper");
+		menuItem23 = new MenuItem("Coller");
 		Menu menuItem24 = new Menu("Police");
 		MenuItem menuItem25 = new MenuItem("Préférence");
 		MenuItem menuItem26 = new MenuItem("Annuler");
@@ -68,7 +72,7 @@ public class MainBar extends HBox {
 		menuItem43 = new MenuItem("Restaurer le Zoom par défaut");
 		
 		MenuItem menuItem51 = new MenuItem("Filtre");
-		MenuItem menuItem52 = new MenuItem("Texte");
+		menuItem52 = new MenuItem("Texte");
 		Menu menuItem53 = new Menu("Formes");
 		MenuItem menuItem54 = new MenuItem("Emoji");
 		

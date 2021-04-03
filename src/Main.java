@@ -150,6 +150,45 @@ public class Main extends Application {
 	      
 	            }
 	        });
+			
+			mainbar.menuItem52.setOnAction(new EventHandler<ActionEvent>() {
+				 
+	            @Override
+	            public void handle(ActionEvent event) {
+	            		AppController.addText(app, cv);
+	      
+	      
+	            }
+	        });
+			
+			
+			mainbar.menuItem21.setOnAction(new EventHandler<ActionEvent>() {
+				 
+	            @Override
+	            public void handle(ActionEvent event) {
+	            	AppController.Copier(app);
+	      
+	      
+	            }
+	        });
+			mainbar.menuItem22.setOnAction(new EventHandler<ActionEvent>() {
+				 
+	            @Override
+	            public void handle(ActionEvent event) {
+	            		AppController.Couper(app,cv);
+	      
+	      
+	            }
+	        });
+			mainbar.menuItem23.setOnAction(new EventHandler<ActionEvent>() {
+				 
+	            @Override
+	            public void handle(ActionEvent event) {
+	            		AppController.Coller(app, cv);
+	      
+	      
+	            }
+	        });
 		
 		
 		

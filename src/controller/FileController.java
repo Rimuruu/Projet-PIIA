@@ -24,6 +24,7 @@ public class FileController {
 	}
 	
 	public static void newFile(AppContext app,MainBar mainbar,CanvasPane cv) {
+		cv.defaultCanvas();
 		WritableImage image = cv.snapshot(new SnapshotParameters(), null);
 		app.file = new File("New File.jpeg");
 		BufferedImage awtImage = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);

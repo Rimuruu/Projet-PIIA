@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import view.CanvasPane;
 
 public class AppContext {
@@ -20,6 +21,7 @@ public class AppContext {
 	public File file;
 	public  ArrayList<Shape> composants;
 	public Shape selected;
+	public Shape cache;
 	public String selectedMode;
 	
 	
@@ -50,6 +52,14 @@ public class AppContext {
 		
 		composants.add(rectangle);
 	}
+	
+	public void addText(CanvasPane cv) {
+		Text t = new Text((cv.getWidth()/2), (cv.getHeight()/2), "This is a test");
+		composants.add(t);
+	}
+	
+	
+	
 	
 	
 }

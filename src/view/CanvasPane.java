@@ -20,6 +20,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import model.AppContext;
 public class CanvasPane extends Canvas {
 	
@@ -34,6 +36,13 @@ public class CanvasPane extends Canvas {
 		this.setOnMouseClicked(e -> {CanvasController.click(e,app,this);});
 		this.setOnMouseDragged(e -> {CanvasController.dragged(e,app,this);});
 		
+	}
+	
+	public void defaultCanvas() {
+		this.setHeight(600);
+		this.setWidth(800);
+		gc.setFill(Color.GREY);
+		gc.fillRect(0,0,this.getWidth(),this.getHeight());
 	}
 	
 	public void drawRect(double x,double y,double w,double h,double zoom) {
@@ -69,6 +78,15 @@ public class CanvasPane extends Canvas {
 	    		double w = ((Rectangle) n).getWidth()*app.zoom;
 	    		double h = ((Rectangle) n).getHeight()*app.zoom;
 	    		gc.fillRect(x, y, w, h);
+	    	}
+	    	else if (n instanceof Text) {
+	    		double x = ((Text) n).getX()*app.zoom;
+	    		double y = ((Text) n).getY()*app.zoom;
+	    		String text = ((Text) n).getText();
+	    		Font f =((Text) n).getFont();
+	    		Font f2 = new Font(f.getSize()*app.zoom);
+	    		gc.setFont(f2);
+	    		gc.fillText(text, x, y);
 	    	}
 	    }
 	    
