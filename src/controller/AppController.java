@@ -1,6 +1,7 @@
 package controller;
 
-import javafx.scene.shape.Circle;
+import javafx.geometry.Bounds;
+import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
@@ -21,9 +22,9 @@ public class AppController {
 		app.setDefaultZoom();
         cv.update(app);
 	}
-	public static void addCircle(AppContext app, CanvasPane cv) {
+	public static void addEllipse(AppContext app, CanvasPane cv) {
 		
-		app.addCircle(cv);
+		app.addEllipse(cv);
 		cv.update(app);
 		
 	}
@@ -51,9 +52,9 @@ public static void Copier(AppContext app){
 	app.cache = app.selected;
 }
 public static Shape deepCopy(Shape s,CanvasPane cv) {
-	if(s instanceof Circle) {
+	if(s instanceof Ellipse) {
 		
-		Circle c = new Circle(((Circle) s).getRadius());
+		Ellipse c = new Ellipse(((Ellipse) s).getRadiusX(),((Ellipse) s).getRadiusY());
 		c.setCenterX((cv.getWidth()/2));
 		c.setCenterY((cv.getHeight()/2));
 		return (Shape) c;
@@ -72,6 +73,18 @@ public static Shape deepCopy(Shape s,CanvasPane cv) {
 }
 public static void Coller(AppContext app ,CanvasPane cv) {
 	if(app.cache != null) app.composants.add(deepCopy(app.cache,cv));
+	cv.update(app);
+}
+
+public static void Redimensionner(AppContext app, CanvasPane cv) {
+	if(app.selected != null && !(app.selected instanceof Text)) {
+		app.selectedMode = "REDI";
+		Bounds b = app.selected.getBoundsInLocal();
+		double size = app.selector.getHeight();
+		double margin = 10;
+    	app.selector.setX(b.getMinX()+b.getWidth()+margin-size);
+    	app.selector.setY(b.getMinY()+b.getHeight()-margin);
+	}
 	cv.update(app);
 }
 

@@ -18,7 +18,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -33,8 +33,9 @@ public class CanvasPane extends Canvas {
 		gc= this.getGraphicsContext2D();
 		gc.setFill(Color.GREY);
 		gc.fillRect(0,0,this.getWidth(),this.getHeight());
-		this.setOnMouseClicked(e -> {CanvasController.click(e,app,this);});
+		this.setOnMousePressed(e -> {CanvasController.click(e,app,this);});
 		this.setOnMouseDragged(e -> {CanvasController.dragged(e,app,this);});
+		this.setOnMouseReleased(e -> {CanvasController.released(e,app,this);});
 		
 	}
 	
@@ -54,8 +55,13 @@ public class CanvasPane extends Canvas {
 		gc.strokeLine(x-margin, y+h+margin, x+w+margin, y+h+margin);
 	}
 	
+	public void drawSelect(double x,double y,double w,double h,double zoom) {
+		gc.setFill(Color.WHITE);
+		gc.fillRect(x, y, w, h);
+	}
+	
 	public void update(AppContext app){
-		Image image = new Image(app.file.toURI().toString());
+		Image image = app.image;
 		this.setHeight(image.getHeight()*app.zoom);
 		this.setWidth(image.getWidth()*app.zoom);
 		gc.setFill(Color.GREY);
@@ -66,12 +72,13 @@ public class CanvasPane extends Canvas {
                 0,image.getWidth()*app.zoom,image.getHeight()*app.zoom);
 	    gc.setFill(Color.BLACK);
 	    for (Node n : app.composants) {
-	    	if(n instanceof Circle) {
-	    		double x = ((Circle) n).getCenterX()*app.zoom;
-	    		double y = ((Circle) n).getCenterY()*app.zoom;
-	    		double r = ((Circle) n).getRadius()*app.zoom;
-	    		System.out.println("x y "+x+" "+y+" "+r);
-	    		gc.fillOval(x-(r), y-(r), r*2, r*2);
+	    	if(n instanceof Ellipse) {
+	    		double x = ((Ellipse) n).getCenterX()*app.zoom;
+	    		double y = ((Ellipse) n).getCenterY()*app.zoom;
+	    		double rx = ((Ellipse) n).getRadiusX()*app.zoom;
+	    		double ry = ((Ellipse) n).getRadiusY()*app.zoom;
+	   
+	    		gc.fillOval(x-(rx), y-(ry), rx*2, ry*2);
 	    	}else if(n instanceof Rectangle) {
 	    		double x = ((Rectangle) n).getX()*app.zoom;
 	    		double y = ((Rectangle) n).getY()*app.zoom;
@@ -90,9 +97,18 @@ public class CanvasPane extends Canvas {
 	    	}
 	    }
 	    
-	    if(app.selected!=null) {
+	    if(app.selected!=null && app.selectedMode.compareTo("SELECT") == 0) {
 	    	Bounds b = app.selected.getBoundsInLocal();
 	    	drawRect(b.getMinX()*app.zoom,b.getMinY()*app.zoom,b.getWidth()*app.zoom,b.getHeight()*app.zoom,app.zoom);
+	    }
+	    else if(app.selected!=null && app.selectedMode.compareTo("REDI") == 0) {
+	    	Bounds b = app.selected.getBoundsInLocal();
+	    	double x = app.selector.getX()*app.zoom;
+    		double y = app.selector.getY()*app.zoom;
+    		double w = app.selector.getWidth()*app.zoom;
+    		double h = app.selector.getHeight()*app.zoom;
+	    	drawRect(b.getMinX()*app.zoom,b.getMinY()*app.zoom,b.getWidth()*app.zoom,b.getHeight()*app.zoom,app.zoom);
+	    	drawSelect(x,y,w,h,app.zoom);
 	    }
 	
 	}

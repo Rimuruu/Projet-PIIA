@@ -47,6 +47,10 @@ public class Main extends Application {
 	public CanvasPane cv;
 	public Position windowPos;
 	
+	 private double valueOf(Color c) {
+	        return c.getRed() + c.getGreen() + c.getBlue();
+	    }
+	
 	public void setController(Stage primaryStage) {
 			mainbar.setOnMousePressed(new EventHandler<MouseEvent>() {
 			
@@ -135,7 +139,7 @@ public class Main extends Application {
 				 
 	            @Override
 	            public void handle(ActionEvent event) {
-	            		AppController.addCircle(app, cv);
+	            		AppController.addEllipse(app, cv);
 	      
 	      
 	            }
@@ -185,6 +189,32 @@ public class Main extends Application {
 	            @Override
 	            public void handle(ActionEvent event) {
 	            		AppController.Coller(app, cv);
+	      
+	      
+	            }
+	        });
+			
+			mainbar.menuItem51.setOnAction(new EventHandler<ActionEvent>() {
+				 
+	            @Override
+	            public void handle(ActionEvent event) {
+	            		try {
+	            			
+	            			app.applyFilter(cv, app.filters.get(2));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+	      
+	      
+	            }
+	        });
+			
+			mainbar.menuItem31.setOnAction(new EventHandler<ActionEvent>() {
+				 
+	            @Override
+	            public void handle(ActionEvent event) {
+	            		AppController.Redimensionner(app, cv);
 	      
 	      
 	            }

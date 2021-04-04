@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -26,7 +27,9 @@ public class FileController {
 	public static void newFile(AppContext app,MainBar mainbar,CanvasPane cv) {
 		cv.defaultCanvas();
 		WritableImage image = cv.snapshot(new SnapshotParameters(), null);
+		
 		app.file = new File("New File.jpeg");
+		app.image = (Image)image;
 		BufferedImage awtImage = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);
 		try 
         {
@@ -113,6 +116,7 @@ public class FileController {
         if (file != null) {
             mainbar.filename.setText(file.getName());
             app.file = file;
+            app.image = new Image(app.file.toURI().toString());
             cv.update(app);
         }
 	}

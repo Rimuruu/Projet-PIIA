@@ -31,6 +31,8 @@ public class MainBar extends HBox {
 	public MenuItem menuItem21;
 	public MenuItem menuItem22;
 	public MenuItem menuItem23;
+	public MenuItem menuItem51; 
+	public MenuItem menuItem31;
 	public MainBar() {
 		
 		menuBar = new MenuBar();
@@ -63,7 +65,7 @@ public class MainBar extends HBox {
 		MenuItem menuItem26 = new MenuItem("Annuler");
 		
 		
-		MenuItem menuItem31 = new MenuItem("Redimensionner");
+		menuItem31 = new MenuItem("Redimensionner");
 		MenuItem menuItem32 = new MenuItem("Mettre en avant");
 		MenuItem menuItem33 = new MenuItem("Mettre en arrière");
 		
@@ -71,7 +73,7 @@ public class MainBar extends HBox {
 		menuItem42 = new MenuItem("Zoom arrière");
 		menuItem43 = new MenuItem("Restaurer le Zoom par défaut");
 		
-		MenuItem menuItem51 = new MenuItem("Filtre");
+		menuItem51 = new MenuItem("Filtre");
 		menuItem52 = new MenuItem("Texte");
 		Menu menuItem53 = new Menu("Formes");
 		MenuItem menuItem54 = new MenuItem("Emoji");
