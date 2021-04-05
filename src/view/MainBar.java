@@ -33,6 +33,8 @@ public class MainBar extends HBox {
 	public MenuItem menuItem23;
 	public MenuItem menuItem51; 
 	public MenuItem menuItem31;
+	public MenuItem menuItem32;
+	public MenuItem menuItem33;
 	public MainBar() {
 		
 		menuBar = new MenuBar();
@@ -66,8 +68,8 @@ public class MainBar extends HBox {
 		
 		
 		menuItem31 = new MenuItem("Redimensionner");
-		MenuItem menuItem32 = new MenuItem("Mettre en avant");
-		MenuItem menuItem33 = new MenuItem("Mettre en arrière");
+		menuItem32 = new MenuItem("Mettre en avant");
+		menuItem33 = new MenuItem("Mettre en arrière");
 		
 		menuItem41 = new MenuItem("Zoom avant");
 		menuItem42 = new MenuItem("Zoom arrière");

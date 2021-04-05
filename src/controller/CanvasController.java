@@ -85,6 +85,7 @@ public class CanvasController {
 					if(intersectEllipse((Ellipse)s,x,y,app.zoom)==true) {
 						
 						app.selected = s;
+						break;
 						
 					
 					}
@@ -92,18 +93,19 @@ public class CanvasController {
 				if(s instanceof Rectangle) { 
 					if(intersectRectangle((Rectangle)s,x,y,app.zoom)==true) {
 						app.selected = s;
-	
+						break;
 						
 					}
 				}
 				else {
 					if(intersectShape(s,x,y,app.zoom)==true) {
 						app.selected = s;
-						if(lastSelected == s) {
+						if(lastSelected == s && e.getClickCount() == 2) {
 							if(s instanceof Text) { 
 								TextInput modif = new TextInput((Text)s,app,cv);
 							}
 						}
+						break;
 						
 					}
 				}

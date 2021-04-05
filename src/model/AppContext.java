@@ -56,6 +56,9 @@ public class AppContext {
 	}
 	
 	
+	
+	
+	
 	private double valueOf(Color c) {
 		return c.getRed() + c.getGreen() + c.getBlue();
 	}

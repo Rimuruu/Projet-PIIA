@@ -77,13 +77,14 @@ public class CanvasPane extends Canvas {
 	    		double y = ((Ellipse) n).getCenterY()*app.zoom;
 	    		double rx = ((Ellipse) n).getRadiusX()*app.zoom;
 	    		double ry = ((Ellipse) n).getRadiusY()*app.zoom;
-	   
+	    		gc.setFill(Color.RED);
 	    		gc.fillOval(x-(rx), y-(ry), rx*2, ry*2);
 	    	}else if(n instanceof Rectangle) {
 	    		double x = ((Rectangle) n).getX()*app.zoom;
 	    		double y = ((Rectangle) n).getY()*app.zoom;
 	    		double w = ((Rectangle) n).getWidth()*app.zoom;
 	    		double h = ((Rectangle) n).getHeight()*app.zoom;
+	    		gc.setFill(Color.BLUE);
 	    		gc.fillRect(x, y, w, h);
 	    	}
 	    	else if (n instanceof Text) {
@@ -92,6 +93,7 @@ public class CanvasPane extends Canvas {
 	    		String text = ((Text) n).getText();
 	    		Font f =((Text) n).getFont();
 	    		Font f2 = new Font(f.getSize()*app.zoom);
+	    		gc.setFill(Color.BLACK);
 	    		gc.setFont(f2);
 	    		gc.fillText(text, x, y);
 	    	}

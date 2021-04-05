@@ -219,6 +219,26 @@ public class Main extends Application {
 	      
 	            }
 	        });
+			
+			mainbar.menuItem32.setOnAction(new EventHandler<ActionEvent>() {
+				 
+	            @Override
+	            public void handle(ActionEvent event) {
+	            	AppController.moveComposantDown(app,cv);;
+	      
+	      
+	            }
+	        });
+			
+			mainbar.menuItem33.setOnAction(new EventHandler<ActionEvent>() {
+				 
+	            @Override
+	            public void handle(ActionEvent event) {
+	            		AppController.moveComposantUp(app,cv);;
+	      
+	      
+	            }
+	        });
 		
 		
 		

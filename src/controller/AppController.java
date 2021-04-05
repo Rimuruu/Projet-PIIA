@@ -85,6 +85,32 @@ public static void Redimensionner(AppContext app, CanvasPane cv) {
     	app.selector.setX(b.getMinX()+b.getWidth()+margin-size);
     	app.selector.setY(b.getMinY()+b.getHeight()-margin);
 	}
+	else if(app.selected != null && app.selected instanceof Text) {
+		TextResize modif = new TextResize((Text)app.selected,app,cv);
+	}
+	cv.update(app);
+}
+
+public static void moveComposantUp(AppContext app, CanvasPane cv) {
+	if(app.selected != null) {
+		int i = app.composants.indexOf(app.selected);
+		if(i > 0) {
+			
+			app.composants.set(i, app.composants.get(i-1));
+			app.composants.set(i-1, app.selected);
+		}
+	}
+	cv.update(app);
+}
+
+public static void moveComposantDown(AppContext app, CanvasPane cv) {
+	if(app.selected != null) {
+		int i = app.composants.indexOf(app.selected);
+		if(i < app.composants.size()-1) {
+			app.composants.set(i, app.composants.get(i+1));
+			app.composants.set(i+1, app.selected);
+		}
+	}
 	cv.update(app);
 }
 
