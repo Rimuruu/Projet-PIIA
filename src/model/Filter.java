@@ -10,7 +10,7 @@ public class Filter{
 	private String name;
     private Function<Color, Color> mapping;
 	
-    Filter(String name, Function<Color, Color> mapping) {
+    public Filter(String name, Function<Color, Color> mapping) {
         this.name = name;
         this.mapping = mapping;
     }

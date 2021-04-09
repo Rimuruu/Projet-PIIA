@@ -1,5 +1,8 @@
 package controller;
 
+
+
+import App.Main;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -10,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.AppContext;
@@ -20,6 +24,8 @@ public class TextInput  extends Stage{
 	public TextField textField;
 	public TextInput(Text text,AppContext app,CanvasPane cv) {
 		super(StageStyle.UTILITY);
+		this.initModality(Modality.WINDOW_MODAL);
+		this.initOwner(Main.primaryStage);
 		 StackPane secondaryLayout = new StackPane();
 		 this.text = text;
 		 Button b = new Button("Ok");
@@ -47,7 +53,8 @@ public class TextInput  extends Stage{
 	}
 	
 	public void submit(AppContext app,CanvasPane cv) {
-		text.setText(textField.getText());
+		String newText = textField.getText();
+		if(!newText.isEmpty())text.setText(newText);
 		this.close();
 		cv.update(app);
 		

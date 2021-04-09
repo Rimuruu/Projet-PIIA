@@ -4,6 +4,7 @@ import javafx.geometry.Bounds;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import model.AppContext;
 import view.CanvasPane;
@@ -51,28 +52,30 @@ public static void Couper(AppContext app ,CanvasPane cv){
 public static void Copier(AppContext app){
 	app.cache = app.selected;
 }
-public static Shape deepCopy(Shape s,CanvasPane cv) {
+public static Shape deepCopy(Shape s,CanvasPane cv,AppContext app) {
 	if(s instanceof Ellipse) {
 		
 		Ellipse c = new Ellipse(((Ellipse) s).getRadiusX(),((Ellipse) s).getRadiusY());
-		c.setCenterX((cv.getWidth()/2));
-		c.setCenterY((cv.getHeight()/2));
+		c.setCenterX(((cv.getWidth()/app.zoom)/2));
+		c.setCenterY(((cv.getHeight()/app.zoom)/2));
 		return (Shape) c;
 	}
 	else if(s instanceof Rectangle) {
 		
-		Rectangle r = new Rectangle((cv.getWidth()/2),(cv.getHeight()/2),((Rectangle) s).getWidth(),((Rectangle) s).getHeight());
+		Rectangle r = new Rectangle(((cv.getWidth()/app.zoom)/2),((cv.getHeight()/app.zoom)/2),((Rectangle) s).getWidth(),((Rectangle) s).getHeight());
 		return (Shape) r;
 	}
 	else if(s instanceof Text) {
 		
-		Text t = new Text((cv.getWidth()/2), (cv.getHeight()/2), ((Text) s).getText());
+		Text t = new Text(((cv.getWidth()/app.zoom)/2), ((cv.getHeight()/app.zoom)/2), ((Text) s).getText());
+		Font f = ((Text) s).getFont();
+		t.setFont(f);
 		return t;
 	}
 	return null;
 }
 public static void Coller(AppContext app ,CanvasPane cv) {
-	if(app.cache != null) app.composants.add(deepCopy(app.cache,cv));
+	if(app.cache != null) app.composants.add(deepCopy(app.cache,cv,app));
 	cv.update(app);
 }
 

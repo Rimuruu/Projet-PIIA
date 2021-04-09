@@ -1,5 +1,6 @@
 package controller;
 
+import App.Main;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.AppContext;
@@ -23,6 +25,8 @@ public class TextResize  extends Stage{
 	public TextField textField;
 	public TextResize(Text text,AppContext app,CanvasPane cv) {
 		super(StageStyle.UTILITY);
+		this.initModality(Modality.WINDOW_MODAL);
+		this.initOwner(Main.primaryStage);
 		 StackPane secondaryLayout = new StackPane();
 		 this.text = text;
 		 Button b = new Button("Ok");

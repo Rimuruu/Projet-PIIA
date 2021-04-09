@@ -49,6 +49,7 @@ public class CanvasPane extends Canvas {
 	public void drawRect(double x,double y,double w,double h,double zoom) {
 		double margin = 10*zoom;
 		gc.setFill(Color.BLACK);
+		gc.setLineDashes(5);
 		gc.strokeLine(x-margin, y-margin, x+w+margin, y-margin);
 		gc.strokeLine(x-margin, y-margin, x-margin, y+h+margin);
 		gc.strokeLine(x+w+margin, y-margin, x+w+margin,y+h+margin);

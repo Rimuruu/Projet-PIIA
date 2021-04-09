@@ -1,3 +1,5 @@
+package App;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -35,6 +37,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 import controller.AppController;
 import controller.FileController;
+import controller.FiltreSelector;
 public class Main extends Application {
 	Rectangle2D screenBounds;
 	private Boolean resizebottom = false;
@@ -46,6 +49,8 @@ public class Main extends Application {
 	public MainBar mainbar ; 
 	public CanvasPane cv;
 	public Position windowPos;
+	public static Stage primaryStage;
+
 	
 	 private double valueOf(Color c) {
 	        return c.getRed() + c.getGreen() + c.getBlue();
@@ -198,13 +203,10 @@ public class Main extends Application {
 				 
 	            @Override
 	            public void handle(ActionEvent event) {
-	            		try {
+	            	
 	            			
-	            			app.applyFilter(cv, app.filters.get(2));
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+	            			FiltreSelector selector = new FiltreSelector(app,cv);
+					
 	      
 	      
 	            }
@@ -254,8 +256,10 @@ public class Main extends Application {
 		fileChooser.getExtensionFilters().add(extFilter);
 		fileChooser.getExtensionFilters().add(extFilter2);
 		fileChooser.getExtensionFilters().add(extFilter3);
-		primaryStage.initStyle(StageStyle.UNDECORATED);
-		primaryStage.setResizable(true);
+		//primaryStage.initStyle(StageStyle.UNDECORATED);
+		//primaryStage.setResizable(true);
+		
+		
 		screenBounds = Screen.getPrimary().getBounds();
 		System.out.println(screenBounds);
 		primaryStage.setTitle("App");
@@ -283,17 +287,21 @@ public class Main extends Application {
 		scene.getStylesheets().add("style.css");
 		setController(primaryStage);
 		FileController.newFile(app,mainbar,cv);
+		this.primaryStage = primaryStage;
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
 		
 	}
 	
-	
-	
-	
-public static void main(String[] args) {
+	public static void main(String[] args) {
 
 		Application.launch(args);
 	}
+	
+	
+	
+	
+	
+
 }

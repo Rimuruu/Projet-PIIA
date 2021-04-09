@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
 
@@ -35,18 +36,12 @@ public class AppContext {
 	public String selectedMode="SELECT";
 	public Image image;
 	public double lastX,lastY=0;
-	public List<Filter> filters = Arrays.asList(
-            new Filter("Négatif", c -> c.invert()),
-            new Filter("Noir et Blanc", c -> c.grayscale()),
-            new Filter("Cyan", c -> {
-            	Color c2 = c.grayscale()
-;            	return Color.rgb((int)c2.getRed(),255,255);
-            	
-            	
-            })
-            
-      
-    );
+	
+	
+	
+	
+	
+	
 	
 	
 	public AppContext(){
@@ -79,14 +74,14 @@ public class AppContext {
 	}
 	
 	public void addRectangle(CanvasPane cv) {
-		Rectangle rectangle = new Rectangle((cv.getWidth()/2),(cv.getHeight()/2),50,50);
+		Rectangle rectangle = new Rectangle((cv.getWidth()/2),(cv.getHeight()/2),100,100);
 		
 		
 		composants.add(rectangle);
 	}
 	
 	public void addText(CanvasPane cv) {
-		Text t = new Text((cv.getWidth()/2), (cv.getHeight()/2), "This is a test");
+		Text t = new Text((cv.getWidth()/2), (cv.getHeight()/2), "Nouveau texte");
 		composants.add(t);
 	}
 	
