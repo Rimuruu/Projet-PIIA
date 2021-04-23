@@ -7,6 +7,7 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import model.AppContext;
+import model.ImageShape;
 import view.CanvasPane;
 
 public class AppController {
@@ -36,6 +37,20 @@ public static void addRectangle(AppContext app, CanvasPane cv) {
 		cv.update(app);
 		
 	}
+
+public static void addTriangle(AppContext app, CanvasPane cv) {
+	
+	app.addTriangle(cv);
+	cv.update(app);
+	
+}
+
+public static void addEtoile(AppContext app, CanvasPane cv) {
+	
+	app.addEtoile(cv);
+	cv.update(app);
+	
+}
 	
 public static void addText(AppContext app, CanvasPane cv) {
 	
@@ -60,7 +75,7 @@ public static Shape deepCopy(Shape s,CanvasPane cv,AppContext app) {
 		c.setCenterY(((cv.getHeight()/app.zoom)/2));
 		return (Shape) c;
 	}
-	else if(s instanceof Rectangle) {
+	else if((s instanceof Rectangle) && !(s instanceof ImageShape)) {
 		
 		Rectangle r = new Rectangle(((cv.getWidth()/app.zoom)/2),((cv.getHeight()/app.zoom)/2),((Rectangle) s).getWidth(),((Rectangle) s).getHeight());
 		return (Shape) r;
@@ -71,6 +86,11 @@ public static Shape deepCopy(Shape s,CanvasPane cv,AppContext app) {
 		Font f = ((Text) s).getFont();
 		t.setFont(f);
 		return t;
+	}
+	else if(s instanceof ImageShape) {
+		ImageShape image = (ImageShape) s;
+		ImageShape copy = new ImageShape(image.i,image.getWidth(),image.getHeight());
+		return copy;
 	}
 	return null;
 }

@@ -74,11 +74,26 @@ public class AppContext {
 	}
 	
 	public void addRectangle(CanvasPane cv) {
-		Rectangle rectangle = new Rectangle((cv.getWidth()/2),(cv.getHeight()/2),100,100);
+		Rectangle rectangle = new Rectangle((cv.getWidth()/2),(cv.getHeight()/2),200,200);
 		
 		
 		composants.add(rectangle);
 	}
+
+	
+	public void addTriangle(CanvasPane cv) {
+		Image i = ShapeLoader.shapes.get("triangle.png");
+		ImageShape triangle = new ImageShape(i);
+		
+		composants.add(triangle);
+	}
+	
+	public void addEtoile(CanvasPane cv) {
+		Image i = ShapeLoader.shapes.get("star.png");
+		ImageShape etoile = new ImageShape(i);
+		
+		composants.add(etoile);
+		}
 	
 	public void addText(CanvasPane cv) {
 		Text t = new Text((cv.getWidth()/2), (cv.getHeight()/2), "Nouveau texte");

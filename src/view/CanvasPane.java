@@ -23,6 +23,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import model.AppContext;
+import model.ImageShape;
 public class CanvasPane extends Canvas {
 	
 	GraphicsContext gc;
@@ -80,7 +81,7 @@ public class CanvasPane extends Canvas {
 	    		double ry = ((Ellipse) n).getRadiusY()*app.zoom;
 	    		gc.setFill(Color.RED);
 	    		gc.fillOval(x-(rx), y-(ry), rx*2, ry*2);
-	    	}else if(n instanceof Rectangle) {
+	    	}else if((n instanceof Rectangle) && !(n instanceof ImageShape)) {
 	    		double x = ((Rectangle) n).getX()*app.zoom;
 	    		double y = ((Rectangle) n).getY()*app.zoom;
 	    		double w = ((Rectangle) n).getWidth()*app.zoom;
@@ -97,6 +98,16 @@ public class CanvasPane extends Canvas {
 	    		gc.setFill(Color.BLACK);
 	    		gc.setFont(f2);
 	    		gc.fillText(text, x, y);
+	    	}
+	    	else if (n instanceof ImageShape) {
+	    		double x = ((Rectangle) n).getX()*app.zoom;
+	    		double y = ((Rectangle) n).getY()*app.zoom;
+	    		double w = ((Rectangle) n).getWidth()*app.zoom;
+	    		double h = ((Rectangle) n).getHeight()*app.zoom;
+	    		Image i = ((ImageShape) n).i;
+	    		gc.drawImage(i,
+	                    x,
+	                    y,w,h); 	
 	    	}
 	    }
 	    

@@ -35,6 +35,9 @@ public class MainBar extends HBox {
 	public MenuItem menuItem31;
 	public MenuItem menuItem32;
 	public MenuItem menuItem33;
+	public MenuItem menuItem54;
+	public MenuItem menuItemForme2;
+	public MenuItem menuItemForme4;
 	public MainBar() {
 		
 		menuBar = new MenuBar();
@@ -78,15 +81,15 @@ public class MainBar extends HBox {
 		menuItem51 = new MenuItem("Filtre");
 		menuItem52 = new MenuItem("Texte");
 		Menu menuItem53 = new Menu("Formes");
-		MenuItem menuItem54 = new MenuItem("Emoji");
+		menuItem54 = new MenuItem("Emoji");
 		
 		MenuItem menuItem61 = new MenuItem("Documentation");
 		MenuItem menuItem62 = new MenuItem("Crédit");
 
 		menuItemForme1 = new MenuItem("Carré");
-		MenuItem menuItemForme2 = new MenuItem("Triangle");
+		menuItemForme2 = new MenuItem("Triangle");
 		menuItemForme3 = new MenuItem("Ovale");
-		MenuItem menuItemForme4 = new MenuItem("Étoile");
+		menuItemForme4 = new MenuItem("Étoile");
 		
 		menuItem53.getItems().add(menuItemForme1);
 		menuItem53.getItems().add(menuItemForme2);

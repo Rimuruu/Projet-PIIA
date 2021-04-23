@@ -31,11 +31,14 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.AppContext;
+import model.EmojiLoader;
+import model.ShapeLoader;
 import view.CanvasPane;
 import view.MainBar;
 import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 import controller.AppController;
+import controller.EmojiSelector;
 import controller.FileController;
 import controller.FiltreSelector;
 public class Main extends Application {
@@ -150,6 +153,27 @@ public class Main extends Application {
 	            }
 	        });
 			
+			mainbar.menuItemForme2.setOnAction(new EventHandler<ActionEvent>() {
+				 
+	            @Override
+	            public void handle(ActionEvent event) {
+	            		AppController.addTriangle(app, cv);
+	      
+	      
+	            }
+	        });
+			
+			
+			mainbar.menuItemForme4.setOnAction(new EventHandler<ActionEvent>() {
+				 
+	            @Override
+	            public void handle(ActionEvent event) {
+	            		AppController.addEtoile(app, cv);
+	      
+	      
+	            }
+	        });
+			
 			mainbar.menuItemForme1.setOnAction(new EventHandler<ActionEvent>() {
 				 
 	            @Override
@@ -212,6 +236,19 @@ public class Main extends Application {
 	            }
 	        });
 			
+			mainbar.menuItem54.setOnAction(new EventHandler<ActionEvent>() {
+				 
+	            @Override
+	            public void handle(ActionEvent event) {
+	            	
+	            			
+	            			EmojiSelector selector = new EmojiSelector(app,cv);
+					
+	      
+	      
+	            }
+	        });
+			
 			mainbar.menuItem31.setOnAction(new EventHandler<ActionEvent>() {
 				 
 	            @Override
@@ -256,6 +293,8 @@ public class Main extends Application {
 		fileChooser.getExtensionFilters().add(extFilter);
 		fileChooser.getExtensionFilters().add(extFilter2);
 		fileChooser.getExtensionFilters().add(extFilter3);
+		EmojiLoader.load();
+		ShapeLoader.load();
 		//primaryStage.initStyle(StageStyle.UNDECORATED);
 		//primaryStage.setResizable(true);
 		
