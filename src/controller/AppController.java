@@ -8,6 +8,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import model.AppContext;
 import model.ImageShape;
+import model.SerializableEllipse;
+import model.SerializableRectangle;
+import model.SerializableText;
 import view.CanvasPane;
 
 public class AppController {
@@ -68,22 +71,22 @@ public static void Copier(AppContext app){
 	app.cache = app.selected;
 }
 public static Shape deepCopy(Shape s,CanvasPane cv,AppContext app) {
-	if(s instanceof Ellipse) {
+	if(s instanceof SerializableEllipse) {
 		
-		Ellipse c = new Ellipse(((Ellipse) s).getRadiusX(),((Ellipse) s).getRadiusY());
+		SerializableEllipse c = new SerializableEllipse(((SerializableEllipse) s).getRadiusX(),((SerializableEllipse) s).getRadiusY());
 		c.setCenterX(((cv.getWidth()/app.zoom)/2));
 		c.setCenterY(((cv.getHeight()/app.zoom)/2));
 		return (Shape) c;
 	}
-	else if((s instanceof Rectangle) && !(s instanceof ImageShape)) {
+	else if((s instanceof SerializableRectangle) && !(s instanceof ImageShape)) {
 		
-		Rectangle r = new Rectangle(((cv.getWidth()/app.zoom)/2),((cv.getHeight()/app.zoom)/2),((Rectangle) s).getWidth(),((Rectangle) s).getHeight());
+		SerializableRectangle r = new SerializableRectangle(((cv.getWidth()/app.zoom)/2),((cv.getHeight()/app.zoom)/2),((SerializableRectangle) s).getWidth(),((SerializableRectangle) s).getHeight());
 		return (Shape) r;
 	}
-	else if(s instanceof Text) {
+	else if(s instanceof SerializableText) {
 		
-		Text t = new Text(((cv.getWidth()/app.zoom)/2), ((cv.getHeight()/app.zoom)/2), ((Text) s).getText());
-		Font f = ((Text) s).getFont();
+		SerializableText t = new SerializableText(((cv.getWidth()/app.zoom)/2), ((cv.getHeight()/app.zoom)/2), ((Text) s).getText());
+		Font f = ((SerializableText) s).getFont();
 		t.setFont(f);
 		return t;
 	}
@@ -109,7 +112,7 @@ public static void Redimensionner(AppContext app, CanvasPane cv) {
     	app.selector.setY(b.getMinY()+b.getHeight()-margin);
 	}
 	else if(app.selected != null && app.selected instanceof Text) {
-		TextResize modif = new TextResize((Text)app.selected,app,cv);
+		TextResize modif = new TextResize((SerializableText)app.selected,app,cv);
 	}
 	cv.update(app);
 }

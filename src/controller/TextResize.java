@@ -18,12 +18,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.AppContext;
+import model.SerializableText;
 import view.CanvasPane;
 
 public class TextResize  extends Stage{
-	public Text text;
+	public SerializableText text;
 	public TextField textField;
-	public TextResize(Text text,AppContext app,CanvasPane cv) {
+	public TextResize(SerializableText text,AppContext app,CanvasPane cv) {
 		super(StageStyle.UTILITY);
 		this.initModality(Modality.WINDOW_MODAL);
 		this.initOwner(Main.primaryStage);

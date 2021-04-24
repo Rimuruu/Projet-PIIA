@@ -110,7 +110,7 @@ public class Main extends Application {
 				 
 	            @Override
 	            public void handle(ActionEvent event) {
-	            	FileController.saveAs(fileChooser,primaryStage,cv);
+	            	FileController.saveAs(fileChooser,primaryStage,cv,app);
 	      
 	            }
 	        });
@@ -290,9 +290,11 @@ public class Main extends Application {
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JPEG files (*.jpeg)", "*.jpeg","*.jpg");
 		FileChooser.ExtensionFilter extFilter2 = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
 		FileChooser.ExtensionFilter extFilter3 = new FileChooser.ExtensionFilter("BMP files (*.png)", "*.bmp");
+		FileChooser.ExtensionFilter extFilter4 = new FileChooser.ExtensionFilter("PH files (*.ph)", "*.ph");
 		fileChooser.getExtensionFilters().add(extFilter);
 		fileChooser.getExtensionFilters().add(extFilter2);
 		fileChooser.getExtensionFilters().add(extFilter3);
+		fileChooser.getExtensionFilters().add(extFilter4);
 		EmojiLoader.load();
 		ShapeLoader.load();
 		//primaryStage.initStyle(StageStyle.UNDECORATED);

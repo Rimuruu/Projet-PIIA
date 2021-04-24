@@ -2,6 +2,9 @@ package model;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,6 +20,7 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelFormat;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -26,28 +30,85 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import view.CanvasPane;
 
-public class AppContext {
-	public double zoom = 1;
-	public File file;
-	public  ArrayList<Shape> composants;
-	public Shape selected;
-	public Shape cache;
-	public Rectangle selector;
-	public String selectedMode="SELECT";
-	public Image image;
-	public double lastX,lastY=0;
+public class AppContext implements Serializable{
+	private static final long serialVersionUID = 1L;
+	public transient double zoom = 1;
+	public transient File file;
+	public transient ArrayList<Shape> composants;
+	public transient Shape selected;
+	public transient Shape cache;
+	public transient SerializableRectangle selector;
+	public transient String selectedMode="SELECT";
+	public transient  Image image;
+	public transient double  lastX,lastY=0;
 	
 	
 	
 	
 	
+	public void setContext(AppContext a) {
+		this.zoom = a.zoom;
+		this.composants = a.composants;
+		this.file = a.file;
+		this.image = a.image;
+	}
 	
 	
+	private void writeObject(ObjectOutputStream oos)
+		    throws IOException {
+			oos.writeBoolean(image != null);
+		    if (image != null) {
+		        int w = (int) image.getWidth();
+		        int h = (int) image.getHeight();
+	
+		        byte[] b = new byte[w * h * 4];
+		        image.getPixelReader().getPixels(0, 0, w, h, PixelFormat.getByteBgraInstance(), b, 0, w * 4);
+	
+		        oos.writeInt(w);
+		        oos.writeInt(h);
+		        oos.write(b);
+		    }
+
+				oos.writeDouble(zoom);
+				oos.writeInt(composants.size());
+				for(Shape composant : composants) {
+					oos.writeObject(composant);
+				}
+		   }
+	
+	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException
+		{
+				
+			if (s.readBoolean()) {
+		        int w = s.readInt();
+		        int h = s.readInt();
+	
+		        byte[] b = new byte[w * h * 4];
+		        s.readFully(b);
+	
+		        WritableImage wImage = new WritableImage(w, h);
+		        wImage.getPixelWriter().setPixels(0, 0, w, h, PixelFormat.getByteBgraInstance(), b, 0, w * 4);
+	
+		        image = wImage;
+		    }
+			selectedMode="SELECT";
+			zoom = s.readDouble();
+			System.out.println("zoom "+zoom);
+			composants = new ArrayList<Shape>();
+			selected = null;
+			selector = new SerializableRectangle(0,0,20,20);
+			int size = s.readInt();
+			System.out.println("size "+size);
+			for(int i = 0 ; i<size ; i++ ) {
+				Shape a = (Shape) s.readObject();
+				composants.add(a);
+			}
+		   }
 	
 	public AppContext(){
 		composants = new ArrayList<Shape>();
 		selected = null;
-		selector = new Rectangle(0,0,20,20);
+		selector = new SerializableRectangle(0,0,20,20);
 	}
 	
 	
@@ -65,7 +126,7 @@ public class AppContext {
 	
 	public void addEllipse(CanvasPane cv) {
 
-		Ellipse Ellipse = new Ellipse(100,100);
+		SerializableEllipse Ellipse = new SerializableEllipse(100,100);
 
 		Ellipse.setCenterX((cv.getWidth()/2));
 		Ellipse.setCenterY((cv.getHeight()/2));
@@ -74,7 +135,7 @@ public class AppContext {
 	}
 	
 	public void addRectangle(CanvasPane cv) {
-		Rectangle rectangle = new Rectangle((cv.getWidth()/2),(cv.getHeight()/2),200,200);
+		SerializableRectangle rectangle = new SerializableRectangle((cv.getWidth()/2),(cv.getHeight()/2),200,200);
 		
 		
 		composants.add(rectangle);
@@ -96,7 +157,7 @@ public class AppContext {
 		}
 	
 	public void addText(CanvasPane cv) {
-		Text t = new Text((cv.getWidth()/2), (cv.getHeight()/2), "Nouveau texte");
+		SerializableText t = new SerializableText((cv.getWidth()/2), (cv.getHeight()/2), "Nouveau texte");
 		composants.add(t);
 	}
 	
@@ -106,6 +167,8 @@ public class AppContext {
         this.image = image2;
 		cv.update(this);
 	}
+	
+
 	
 	
 	
