@@ -65,9 +65,11 @@ public static void Couper(AppContext app ,CanvasPane cv){
 	app.composants.remove(app.selected);
 	app.cache = app.selected;
 	app.selected = null;
+	if(app.cache !=null) app.setIsSaved(false);
 	cv.update(app);
 }
 public static void Copier(AppContext app){
+	
 	app.cache = app.selected;
 }
 public static Shape deepCopy(Shape s,CanvasPane cv,AppContext app) {
@@ -98,7 +100,10 @@ public static Shape deepCopy(Shape s,CanvasPane cv,AppContext app) {
 	return null;
 }
 public static void Coller(AppContext app ,CanvasPane cv) {
-	if(app.cache != null) app.composants.add(deepCopy(app.cache,cv,app));
+	if(app.cache != null) { 
+		app.composants.add(deepCopy(app.cache,cv,app));
+		app.setIsSaved(false);
+	}
 	cv.update(app);
 }
 
@@ -125,6 +130,7 @@ public static void moveComposantUp(AppContext app, CanvasPane cv) {
 			app.composants.set(i, app.composants.get(i-1));
 			app.composants.set(i-1, app.selected);
 		}
+		app.setIsSaved(false);
 	}
 	cv.update(app);
 }
@@ -136,6 +142,7 @@ public static void moveComposantDown(AppContext app, CanvasPane cv) {
 			app.composants.set(i, app.composants.get(i+1));
 			app.composants.set(i+1, app.selected);
 		}
+		app.setIsSaved(false);
 	}
 	cv.update(app);
 }

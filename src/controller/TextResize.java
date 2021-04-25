@@ -71,6 +71,7 @@ public class TextResize  extends Stage{
 		System.out.println(i);
 		Font f = new Font(i);
 		this.text.setFont(f);
+		app.setIsSaved(false);
 		this.close();
 		cv.update(app);
 		

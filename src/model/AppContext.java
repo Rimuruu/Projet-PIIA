@@ -1,5 +1,7 @@
 package model;
 
+
+import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -29,6 +31,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import view.CanvasPane;
+import view.MainBar;
 
 public class AppContext implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -41,9 +44,10 @@ public class AppContext implements Serializable{
 	public transient String selectedMode="SELECT";
 	public transient  Image image;
 	public transient double  lastX,lastY=0;
+	public transient boolean isSaved = true;
+	protected PropertyChangeSupport propertyChangeSupport;
 	
-	
-	
+
 	
 	
 	public void setContext(AppContext a) {
@@ -51,6 +55,12 @@ public class AppContext implements Serializable{
 		this.composants = a.composants;
 		this.file = a.file;
 		this.image = a.image;
+	}
+	
+	public void setIsSaved(boolean b) {
+		boolean old = this.isSaved;
+		this.isSaved = b;
+		propertyChangeSupport.firePropertyChange("isSaved",old, b);
 	}
 	
 	
@@ -92,6 +102,7 @@ public class AppContext implements Serializable{
 		        image = wImage;
 		    }
 			selectedMode="SELECT";
+			isSaved = true;
 			zoom = s.readDouble();
 			System.out.println("zoom "+zoom);
 			composants = new ArrayList<Shape>();
@@ -109,6 +120,7 @@ public class AppContext implements Serializable{
 		composants = new ArrayList<Shape>();
 		selected = null;
 		selector = new SerializableRectangle(0,0,20,20);
+		propertyChangeSupport = new PropertyChangeSupport(this);
 	}
 	
 	
@@ -145,19 +157,20 @@ public class AppContext implements Serializable{
 	public void addTriangle(CanvasPane cv) {
 		Image i = ShapeLoader.shapes.get("triangle.png");
 		ImageShape triangle = new ImageShape(i);
-		
+		this.setIsSaved(false);
 		composants.add(triangle);
 	}
 	
 	public void addEtoile(CanvasPane cv) {
 		Image i = ShapeLoader.shapes.get("star.png");
 		ImageShape etoile = new ImageShape(i);
-		
+		this.setIsSaved(false);
 		composants.add(etoile);
 		}
 	
 	public void addText(CanvasPane cv) {
 		SerializableText t = new SerializableText((cv.getWidth()/2), (cv.getHeight()/2), "Nouveau texte");
+		this.setIsSaved(false);
 		composants.add(t);
 	}
 	
@@ -165,8 +178,16 @@ public class AppContext implements Serializable{
 		Image image = this.image;
 		Image image2 =  filtre.apply(image);
         this.image = image2;
+        this.setIsSaved(false);
 		cv.update(this);
 	}
+
+	public void addPropertyChangeListener(MainBar mainbar) {
+		propertyChangeSupport.addPropertyChangeListener(mainbar);
+		
+	}
+
+
 	
 
 	

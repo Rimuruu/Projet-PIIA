@@ -3,9 +3,12 @@ package view;
 import java.io.File;
 
 import controller.CanvasController;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
+
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -124,6 +127,10 @@ public class CanvasPane extends Canvas {
 	    	drawRect(b.getMinX()*app.zoom,b.getMinY()*app.zoom,b.getWidth()*app.zoom,b.getHeight()*app.zoom,app.zoom);
 	    	drawSelect(x,y,w,h,app.zoom);
 	    }
+	    
+
 	
 	}
+
+
 }

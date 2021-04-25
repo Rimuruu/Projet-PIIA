@@ -55,7 +55,10 @@ public class TextInput  extends Stage{
 	
 	public void submit(AppContext app,CanvasPane cv) {
 		String newText = textField.getText();
-		if(!newText.isEmpty())text.setText(newText);
+		if(!newText.isEmpty()) {
+			text.setText(newText);
+			app.setIsSaved(false);
+		}
 		this.close();
 		cv.update(app);
 		

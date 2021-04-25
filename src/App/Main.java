@@ -75,7 +75,10 @@ public class Main extends Application {
 			});
 			mainbar.menuItem5.setOnAction(new EventHandler<ActionEvent>() {
 				  @Override public void handle(ActionEvent mouseEvent) {
-					  Platform.exit();
+					primaryStage.close();
+					
+					
+					 
 				  }
 				});
 			
@@ -137,7 +140,7 @@ public class Main extends Application {
 				 
 	            @Override
 	            public void handle(ActionEvent event) {
-	            		FileController.newFile(app,mainbar,cv);
+	            		FileController.newFile(fileChooser, primaryStage, app,mainbar,cv);
 	      
 	      
 	            }
@@ -311,7 +314,7 @@ public class Main extends Application {
 
 		VBox pane = new VBox();
 	
-
+		app.addPropertyChangeListener(mainbar);
 		pane.getChildren().addAll(cv);
 		
 		
@@ -327,13 +330,20 @@ public class Main extends Application {
 		
 		scene.getStylesheets().add("style.css");
 		setController(primaryStage);
-		FileController.newFile(app,mainbar,cv);
+		FileController.newFile(fileChooser, primaryStage, app,mainbar,cv);
+		primaryStage.setOnHiding( event -> {FileController.close(fileChooser, primaryStage, cv, mainbar, app);} );
 		this.primaryStage = primaryStage;
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
 		
 	}
+	
+	public void stop() {
+	
+		
+	}
+	
 	
 	public static void main(String[] args) {
 

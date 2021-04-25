@@ -118,7 +118,11 @@ public class EmojiSelector  extends Stage{
 	}
 	
 	public void submit(AppContext app,CanvasPane cv) {
-		if(emoji!= null )app.composants.add(new ImageShape(emoji));
+		if(emoji!= null ) {
+			app.composants.add(new ImageShape(emoji));
+			app.setIsSaved(false);
+			
+		}
 		this.close();
 		cv.update(app);
 	}

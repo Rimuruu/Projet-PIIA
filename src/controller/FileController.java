@@ -28,23 +28,56 @@ public class FileController {
 	      .map(f -> f.substring(filename.lastIndexOf(".") + 1));
 	}
 	
-	public static void newFile(AppContext app,MainBar mainbar,CanvasPane cv) {
-		cv.defaultCanvas();
-		WritableImage image = cv.snapshot(new SnapshotParameters(), null);
-		app.setDefaultZoom();
-		app.composants.clear();
-		app.selected = null;
-		app.file = new File("New File.jpeg");
-		app.image = (Image)image;
-		BufferedImage awtImage = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);
-		try 
-        {
-			ImageIO.write(SwingFXUtils.fromFXImage(image,awtImage), "JPEG", app.file);
-        }catch (IOException ex) 
-        { 
-            System.out.println(ex.toString());
-        }
-		mainbar.updateContext(app);
+	public static void newFile(FileChooser fileChooser,Stage primaryStage,AppContext app,MainBar mainbar,CanvasPane cv) {
+		if(app.isSaved) {
+			cv.defaultCanvas();
+			WritableImage image = cv.snapshot(new SnapshotParameters(), null);
+			app.setDefaultZoom();
+			app.composants.clear();
+			app.selected = null;
+			app.file = new File("New File.jpeg");
+			app.image = (Image)image;
+			BufferedImage awtImage = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);
+			try 
+	        {
+				ImageIO.write(SwingFXUtils.fromFXImage(image,awtImage), "JPEG", app.file);
+				app.file.delete();
+	        }catch (IOException ex) 
+	        { 
+	            System.out.println(ex.toString());
+	        }
+			mainbar.updateContext(app);
+			app.setIsSaved(false);
+		}
+		else {
+			WarningInput wi = new WarningInput(app, cv);
+			int r = wi.getResult();
+			System.out.println(r);
+			if(r == 1) {
+				save(fileChooser, primaryStage, cv, app);
+				newFile( fileChooser, primaryStage, app,mainbar,cv);
+			}
+			else if(r == 2) {
+				cv.defaultCanvas();
+				WritableImage image = cv.snapshot(new SnapshotParameters(), null);
+				app.setDefaultZoom();
+				app.composants.clear();
+				app.selected = null;
+				app.file = new File("New File.jpeg");
+				app.image = (Image)image;
+				BufferedImage awtImage = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);
+				try 
+		        {
+					ImageIO.write(SwingFXUtils.fromFXImage(image,awtImage), "JPEG", app.file);
+					app.file.delete();
+		        }catch (IOException ex) 
+		        { 
+		            System.out.println(ex.toString());
+		        }
+				mainbar.updateContext(app);
+				app.setIsSaved(false);
+			}
+		}
 	}
 	
 	
@@ -69,6 +102,7 @@ public class FileController {
         			if(ext.equals("jpeg")) {
                		 BufferedImage awtImage = new BufferedImage((int)image.getWidth(), (int)image.getHeight(), BufferedImage.TYPE_INT_RGB);
                		 ImageIO.write(SwingFXUtils.fromFXImage(image,awtImage), "JPEG", file);
+               		 app.setIsSaved(true);
                	}
         		else if (ext.equals("ph")) {
                 		ObjectOutputStream oos = null;
@@ -77,6 +111,7 @@ public class FileController {
                 		    fout = new FileOutputStream(file.getAbsolutePath(), false);
                 		    oos = new ObjectOutputStream(fout);
                 		    oos.writeObject(app);
+                		    app.setIsSaved(true);
                 		} catch (Exception ex) {
                 		    ex.printStackTrace();
                 		} finally {
@@ -87,6 +122,7 @@ public class FileController {
                 	}
                	else {
                		ImageIO.write(SwingFXUtils.fromFXImage(image, null), ext, file);
+               		app.setIsSaved(true);
                	}
                 	
         		}
@@ -117,6 +153,7 @@ public class FileController {
             	if(ext.equals("jpeg")) {
             		 BufferedImage awtImage = new BufferedImage((int)image.getWidth(), (int)image.getHeight(), BufferedImage.TYPE_INT_RGB);
             		 ImageIO.write(SwingFXUtils.fromFXImage(image,awtImage), "JPEG", file);
+            		 app.setIsSaved(true);
             	}
             	else if (ext.equals("ph")) {
             		ObjectOutputStream oos = null;
@@ -125,6 +162,7 @@ public class FileController {
             		    fout = new FileOutputStream(file.getAbsolutePath(), false);
             		    oos = new ObjectOutputStream(fout);
             		    oos.writeObject(app);
+            		    app.setIsSaved(true);
             		} catch (Exception ex) {
             		    ex.printStackTrace();
             		} finally {
@@ -135,6 +173,7 @@ public class FileController {
             	}
             	else {
             		ImageIO.write(SwingFXUtils.fromFXImage(image, null), ext, file);
+            		app.setIsSaved(true);
             	}
                 
             }
@@ -145,38 +184,98 @@ public class FileController {
 	}
 	
 	public static void open(FileChooser fileChooser,Stage primaryStage,CanvasPane cv,MainBar mainbar,AppContext app) {
-		File file = fileChooser.showOpenDialog(primaryStage);
-        if (file != null) {
-        	String ext  = getExtensionByStringHandling(file.getName()).get();
-        	
-        	if (ext.equals("ph")) {
-        		try {
-        		ObjectInputStream ois = null;
-        		ois = new ObjectInputStream(new FileInputStream(file));
-        		AppContext a = (AppContext)  ois.readObject();
-        		a.file = file;
-        		mainbar.filename.setText(a.file.getName());
-        		app.setContext(a);
-        		cv.update(app);
-        		}
-        		catch (Exception ex) {
-        			ex.printStackTrace();
-        		}
-        		
-        	}
-        	else {
-        	
-            mainbar.filename.setText(file.getName());
-            app.setDefaultZoom();
-    		app.composants.clear();
-    		app.selected = null;
-            app.file = file;
-            app.image = new Image(app.file.toURI().toString());
-            cv.update(app);
-        	}
-        }
+		if(app.isSaved) {
+			File file = fileChooser.showOpenDialog(primaryStage);
+	        if (file != null) {
+	        	String ext  = getExtensionByStringHandling(file.getName()).get();
+	        	
+	        	if (ext.equals("ph")) {
+	        		try {
+	        		ObjectInputStream ois = null;
+	        		ois = new ObjectInputStream(new FileInputStream(file));
+	        		AppContext a = (AppContext)  ois.readObject();
+	        		a.file = file;
+	        		mainbar.filename.setText(a.file.getName());
+	        		app.setContext(a);
+	        		cv.update(app);
+	        		app.setIsSaved(true);
+	        		}
+	        		catch (Exception ex) {
+	        			ex.printStackTrace();
+	        		}
+	        		
+	        	}
+	        	else {
+	        	
+	            mainbar.filename.setText(file.getName());
+	            app.setDefaultZoom();
+	    		app.composants.clear();
+	    		app.selected = null;
+	            app.file = file;
+	            app.image = new Image(app.file.toURI().toString());
+	            cv.update(app);
+	            app.setIsSaved(true);
+	        	}
+	        }
+		}
+		else {
+			WarningInput wi = new WarningInput(app, cv);
+			int r = wi.getResult();
+			System.out.println(r);
+			if(r == 1) {
+				save(fileChooser, primaryStage, cv, app);
+				open(fileChooser, primaryStage, cv, mainbar, app);
+			}
+			else if(r == 2) {
+				File file = fileChooser.showOpenDialog(primaryStage);
+		        if (file != null) {
+		        	String ext  = getExtensionByStringHandling(file.getName()).get();
+		        	
+		        	if (ext.equals("ph")) {
+		        		try {
+		        		ObjectInputStream ois = null;
+		        		ois = new ObjectInputStream(new FileInputStream(file));
+		        		AppContext a = (AppContext)  ois.readObject();
+		        		a.file = file;
+		        		mainbar.filename.setText(a.file.getName());
+		        		app.setContext(a);
+		        		cv.update(app);
+		        		app.setIsSaved(true);
+		        		}
+		        		catch (Exception ex) {
+		        			ex.printStackTrace();
+		        		}
+		        		
+		        	}
+		        	else {
+		        	
+		            mainbar.filename.setText(file.getName());
+		            app.setDefaultZoom();
+		    		app.composants.clear();
+		    		app.selected = null;
+		            app.file = file;
+		            app.image = new Image(app.file.toURI().toString());
+		            cv.update(app);
+		            app.setIsSaved(true);
+		        	}
+		        }
+			}
+		}
 	}
 	
+	
+	public static void close(FileChooser fileChooser,Stage primaryStage,CanvasPane cv,MainBar mainbar,AppContext app) {
+		if(!app.isSaved) {
+			WarningInput wi = new WarningInput(app, cv);
+			int r = wi.getResult();
+			System.out.println(r);
+			if(r == 1) {
+				save(fileChooser, primaryStage, cv, app);
+			
+			}
+			
+		}
+	}
 	
 	
 }

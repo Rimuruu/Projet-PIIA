@@ -1,5 +1,8 @@
 package view;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -14,8 +17,9 @@ import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import model.AppContext;
 
-public class MainBar extends HBox {
+public class MainBar extends HBox  implements PropertyChangeListener {
 	public Label filename;
+	public Label isSaved;
 	public MenuBar menuBar;
 	public MenuItem menuItem5;
 	public MenuItem menuItem2;
@@ -38,6 +42,19 @@ public class MainBar extends HBox {
 	public MenuItem menuItem54;
 	public MenuItem menuItemForme2;
 	public MenuItem menuItemForme4;
+	
+	 @Override
+	    public void propertyChange(PropertyChangeEvent event) {
+	        if (event.getPropertyName().equals("isSaved")) {
+	            if(event.getNewValue().equals(true)) {
+	            	isSaved.setText("Sauvegardé");
+	            }
+	            else if(event.getNewValue().equals(false)){
+	            	isSaved.setText("Pas sauvegardé");
+	            }
+	        }
+	    }
+	
 	public MainBar() {
 		
 		menuBar = new MenuBar();
@@ -51,9 +68,12 @@ public class MainBar extends HBox {
 		Menu menu5 = new Menu("Outils");
 		Menu menu6 = new Menu("Aide");
 		this.filename = new Label();
+		this.isSaved = new Label("Sauvegardé");
 		filename.setPadding(new Insets(10, 10, 10, 10));
-		HBox labelbox = new HBox(this.filename);
+		isSaved.setPadding(new Insets(10, 10, 10, 10));
+		HBox labelbox = new HBox(this.filename,this.isSaved);
 		labelbox.setAlignment(Pos.CENTER_RIGHT);
+	
 
 		
 		menuItem1 = new MenuItem("Nouveau");
@@ -137,6 +157,7 @@ public class MainBar extends HBox {
 		menuBar.setBackground(Background.EMPTY);
 		this.getChildren().addAll(menuBar,labelbox);
 		this.setHgrow(labelbox, Priority.ALWAYS);
+
 		this.setBackground(new Background(new BackgroundFill(Color.web("7A1D76"),CornerRadii.EMPTY, Insets.EMPTY)));
 
 	}

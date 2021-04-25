@@ -73,7 +73,7 @@ public class CanvasController {
 		double x = e.getX();
 		double y = e.getY();
 		Shape lastSelected = app.selected;
-		
+
 		
 		if(intersectShape(((Shape)app.selector),x,y,app.zoom) == true) {
 			app.lastX = app.selector.getX();
@@ -121,6 +121,7 @@ public class CanvasController {
 		
 		cv.update(app);
 		
+		
 	}
 	
 	public static void dragged(MouseEvent e,AppContext app,CanvasPane cv) {
@@ -144,6 +145,7 @@ public class CanvasController {
 					r.setX((x/app.zoom)-(b.getWidth()/2));
 					r.setY((y/app.zoom)+(b.getHeight()/2));
 				}
+				 app.setIsSaved(false);
 			}
 			
 		}
@@ -179,10 +181,12 @@ public class CanvasController {
 				app.lastX = app.selector.getX();
 				app.lastY = app.selector.getY();
 			}
+			app.setIsSaved(false);
 			
 		
 		}
 		cv.update(app);
+		
 	}
 	
 	
