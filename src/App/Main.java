@@ -38,6 +38,7 @@ import view.MainBar;
 import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 import controller.AppController;
+import controller.Documentation;
 import controller.EmojiSelector;
 import controller.FileController;
 import controller.FiltreSelector;
@@ -282,6 +283,19 @@ public class Main extends Application {
 	            }
 	        });
 		
+			mainbar.menuItem61.setOnAction(new EventHandler<ActionEvent>() {
+				 
+	            @Override
+	            public void handle(ActionEvent event) {
+
+	            	try {
+						Documentation doc = new Documentation();
+					} catch (Exception e) {
+						System.out.println("Error 4040");
+					}
+						      
+	            }
+	        });
 		
 		
 		
