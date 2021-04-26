@@ -42,6 +42,8 @@ public class MainBar extends HBox  implements PropertyChangeListener {
 	public MenuItem menuItem54;
 	public MenuItem menuItemForme2;
 	public MenuItem menuItemForme4;
+	public MenuItem menuItem61;
+	public MenuItem menuItem62;
 	
 	 @Override
 	    public void propertyChange(PropertyChangeEvent event) {
@@ -103,8 +105,8 @@ public class MainBar extends HBox  implements PropertyChangeListener {
 		Menu menuItem53 = new Menu("Formes");
 		menuItem54 = new MenuItem("Emoji");
 		
-		MenuItem menuItem61 = new MenuItem("Documentation");
-		MenuItem menuItem62 = new MenuItem("Crédit");
+		menuItem61 = new MenuItem("Documentation");
+		menuItem62 = new MenuItem("Crédit");
 
 		menuItemForme1 = new MenuItem("Carré");
 		menuItemForme2 = new MenuItem("Triangle");
