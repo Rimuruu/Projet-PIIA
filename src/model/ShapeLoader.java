@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
@@ -15,14 +14,14 @@ import javafx.scene.image.Image;
 
 public class ShapeLoader {
 
-    // File representing the folder that you select using a FileChooser
+
     static final File dir = new File("./src/asset/shape");
 
-    // array of supported extensions (use a List if you prefer)
+
     static final String ext = "png";
     
     public static HashMap<String,Image> shapes = new HashMap<String,Image>();
-    // filter to identify images based on their extensions
+
     static final FilenameFilter IMAGE_FILTER = new FilenameFilter() {
 
         @Override
@@ -36,20 +35,14 @@ public class ShapeLoader {
     };
 
     public static void load() {
-    	 System.out.println(dir.getAbsolutePath());
-        if (dir.isDirectory()) { // make sure it's a directory
+        if (dir.isDirectory()) { 
             for (final File f : dir.listFiles(IMAGE_FILTER)) {
                 BufferedImage img = null;
 
                 try {
                     img = ImageIO.read(f);
                     
-                    // you probably want something more involved here
-                    // to display in your UI
-                    System.out.println("image: " + f.getName());
-                    System.out.println(" width : " + img.getWidth());
-                    System.out.println(" height: " + img.getHeight());
-                    System.out.println(" size  : " + f.length());
+
                     shapes.put(f.getName(),SwingFXUtils.toFXImage(img, null));
                     
                 } catch (final IOException e) {

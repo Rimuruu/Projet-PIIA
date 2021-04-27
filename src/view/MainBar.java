@@ -44,6 +44,8 @@ public class MainBar extends HBox  implements PropertyChangeListener {
 	public MenuItem menuItemForme4;
 	public MenuItem menuItem61;
 	public MenuItem menuItem62;
+	public MenuItem menuItem26;
+	public MenuItem menuItem25;
 	
 	 @Override
 	    public void propertyChange(PropertyChangeEvent event) {
@@ -87,9 +89,9 @@ public class MainBar extends HBox  implements PropertyChangeListener {
 		menuItem21 = new MenuItem("Copier");
 		menuItem22 = new MenuItem("Couper");
 		menuItem23 = new MenuItem("Coller");
-		Menu menuItem24 = new Menu("Police");
-		MenuItem menuItem25 = new MenuItem("Préférence");
-		MenuItem menuItem26 = new MenuItem("Annuler");
+		//Menu menuItem24 = new Menu("Police");
+		menuItem25 = new MenuItem("Préférence");
+		menuItem26 = new MenuItem("Annuler");
 		
 		
 		menuItem31 = new MenuItem("Redimensionner");
@@ -127,7 +129,7 @@ public class MainBar extends HBox  implements PropertyChangeListener {
 		menu2.getItems().add(menuItem21);
 		menu2.getItems().add(menuItem22);
 		menu2.getItems().add(menuItem23);
-		menu2.getItems().add(menuItem24);
+		//menu2.getItems().add(menuItem24);
 		menu2.getItems().add(menuItem25);
 		menu2.getItems().add(menuItem26);
 		

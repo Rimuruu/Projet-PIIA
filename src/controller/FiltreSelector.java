@@ -1,20 +1,16 @@
 package controller;
 
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 import App.Main;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -23,10 +19,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -56,6 +50,7 @@ public class FiltreSelector  extends Stage{
 		this.initModality(Modality.WINDOW_MODAL);
 		this.initOwner(Main.primaryStage);
 		this.setResizable(false);
+		this.setTitle("Galerie des filtres");
 		FlowPane flow = new FlowPane();
 		VBox vbox = new VBox(); 
 		HBox hbox = new HBox();;

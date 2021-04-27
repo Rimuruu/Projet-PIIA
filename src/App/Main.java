@@ -1,38 +1,22 @@
 package App;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Optional;
-
-import javax.imageio.ImageIO;
+import java.util.ArrayList;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import model.AppContext;
 import model.EmojiLoader;
 import model.ShapeLoader;
+import model.Preference;
 import view.CanvasPane;
 import view.MainBar;
 import javafx.stage.FileChooser;
@@ -42,6 +26,8 @@ import controller.Documentation;
 import controller.EmojiSelector;
 import controller.FileController;
 import controller.FiltreSelector;
+import controller.PreferenceModifier;
+
 public class Main extends Application {
 	Rectangle2D screenBounds;
 	private Boolean resizebottom = false;
@@ -50,11 +36,30 @@ public class Main extends Application {
 	private FileChooser fileChooser;
 	class Position { double x, y; } 
 	public AppContext app;
+	public static ArrayList<AppContext> historique = new ArrayList<AppContext>();
+	
 	public MainBar mainbar ; 
 	public CanvasPane cv;
 	public Position windowPos;
+	public Preference pref;
 	public static Stage primaryStage;
+	
+	
+	
 
+	
+	public static void save(AppContext app,CanvasPane cv) {
+		historique.add(app.deepCopy(cv));
+	}
+	
+	public void annuler(CanvasPane cv) {
+		if(historique.size() >0) {
+			app.setHistorique(historique.remove(historique.size()-1));		
+			cv.update(app);
+		}
+
+		}
+	
 	
 	 private double valueOf(Color c) {
 	        return c.getRed() + c.getGreen() + c.getBlue();
@@ -288,11 +293,36 @@ public class Main extends Application {
 	            @Override
 	            public void handle(ActionEvent event) {
 
-	            	try {
+	            
 						Documentation doc = new Documentation();
-					} catch (Exception e) {
-						System.out.println("Error 4040");
-					}
+					
+						      
+	            }
+	        });
+			
+			mainbar.menuItem26.setOnAction(new EventHandler<ActionEvent>() {
+				 
+	            @Override
+	            public void handle(ActionEvent event) {
+
+	            	annuler(cv);
+						      
+	            }
+	        });
+			
+			primaryStage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+	            @Override
+	            public void handle(KeyEvent event) {
+	            	keyHandler(event); 
+	            }
+	        });
+			
+			mainbar.menuItem25.setOnAction(new EventHandler<ActionEvent>() {
+				 
+	            @Override
+	            public void handle(ActionEvent event) {
+
+	            	PreferenceModifier p = new PreferenceModifier(pref);
 						      
 	            }
 	        });
@@ -317,9 +347,9 @@ public class Main extends Application {
 		//primaryStage.initStyle(StageStyle.UNDECORATED);
 		//primaryStage.setResizable(true);
 		
-		
+		pref = new Preference();
 		screenBounds = Screen.getPrimary().getBounds();
-		System.out.println(screenBounds);
+
 		primaryStage.setTitle("App");
 		app = new AppContext();
 		mainbar = new MainBar();
@@ -343,20 +373,47 @@ public class Main extends Application {
 		
 		
 		scene.getStylesheets().add("style.css");
-		setController(primaryStage);
+		
 		FileController.newFile(fileChooser, primaryStage, app,mainbar,cv);
 		primaryStage.setOnHiding( event -> {FileController.close(fileChooser, primaryStage, cv, mainbar, app);} );
 		this.primaryStage = primaryStage;
 		primaryStage.setScene(scene);
+		setController(primaryStage);
 		primaryStage.show();
 
 		
 	}
 	
-	public void stop() {
 	
-		
-	}
+	
+
+	
+	public void keyHandler(KeyEvent event) {
+
+
+		if(event.isControlDown()) {
+			
+			if(event.getCode() == Preference.ANNULER) {
+				annuler(cv);
+			}
+			else if(event.getCode() == Preference.SAVE) {
+				FileController.save(fileChooser, primaryStage, cv, app);
+			}
+			else if(event.getCode() == Preference.COPIER) {
+				AppController.Copier(app);
+			}
+			else if(event.getCode() == Preference.COUPER) {
+				AppController.Couper(app, cv);
+			}
+			else if(event.getCode() == Preference.COLLER) {
+				AppController.Coller(app, cv);
+			}
+					
+			
+				
+			
+		}
+    }
 	
 	
 	public static void main(String[] args) {

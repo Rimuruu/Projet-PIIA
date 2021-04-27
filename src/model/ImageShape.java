@@ -1,28 +1,22 @@
 package model;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import javax.imageio.ImageIO;
-
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelFormat;
 import javafx.scene.image.WritableImage;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 
 public class ImageShape extends SerializableRectangle implements Serializable{
 	private static final long serialVersionUID = 1L;
 	public transient Image i;
 	
 	public ImageShape( Image i) {
-		super(i.getWidth(),i.getHeight());
+		super(200,200);
 		this.i = i;
-		System.out.println(this.getBoundsInLocal());
+	
 		
 		
 		
@@ -31,7 +25,7 @@ public class ImageShape extends SerializableRectangle implements Serializable{
 	public ImageShape( Image i,double width, double height) {
 		super(width,height);
 		this.i = i;
-		System.out.println(this.getBoundsInLocal());
+
 		
 		
 		

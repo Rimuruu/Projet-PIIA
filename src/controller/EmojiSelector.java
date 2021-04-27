@@ -1,14 +1,7 @@
 package controller;
 
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import App.Main;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -25,16 +17,13 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.AppContext;
 import model.EmojiLoader;
-import model.Filter;
 import model.ImageShape;
 import view.CanvasPane;
 
@@ -119,7 +108,10 @@ public class EmojiSelector  extends Stage{
 	
 	public void submit(AppContext app,CanvasPane cv) {
 		if(emoji!= null ) {
-			app.composants.add(new ImageShape(emoji));
+			ImageShape im = new ImageShape(emoji);
+			im.setX((cv.getWidth()/2)-((im.getHeight()/2)*app.zoom));
+			im.setY((cv.getHeight()/2)-((im.getHeight()/2)*app.zoom));
+			app.composants.add(im);
 			app.setIsSaved(false);
 			
 		}

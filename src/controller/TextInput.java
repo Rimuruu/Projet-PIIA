@@ -12,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -38,7 +37,7 @@ public class TextInput  extends Stage{
 		 b1.setAlignment(Pos.CENTER);
 		 b2.setAlignment(Pos.CENTER);
 		 secondaryLayout.getChildren().addAll(vbox);
-		 this.setTitle("Modifier Texte");
+		 this.setTitle("Modifier un texte");
 		 b.setOnAction(new EventHandler<ActionEvent>() {
 			 
 	            @Override

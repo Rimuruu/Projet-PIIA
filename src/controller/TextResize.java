@@ -13,7 +13,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -68,7 +67,6 @@ public class TextResize  extends Stage{
 	public void submit(AppContext app,CanvasPane cv) {
 		 String uiValue = textField.getText();
 		int i=Integer.parseInt(uiValue);
-		System.out.println(i);
 		Font f = new Font(i);
 		this.text.setFont(f);
 		app.setIsSaved(false);

@@ -7,11 +7,9 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
 public class Filter{
-	private String name;
-    private Function<Color, Color> mapping;
+	private Function<Color, Color> mapping;
 	
     public Filter(String name, Function<Color, Color> mapping) {
-        this.name = name;
         this.mapping = mapping;
     }
     

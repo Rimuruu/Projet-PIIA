@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.util.Optional;
 import javax.imageio.ImageIO;
 
+import App.Main;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
@@ -48,11 +49,12 @@ public class FileController {
 	        }
 			mainbar.updateContext(app);
 			app.setIsSaved(false);
+			Main.historique.clear();
+		     Main.save(app, cv);
 		}
 		else {
 			WarningInput wi = new WarningInput(app, cv);
 			int r = wi.getResult();
-			System.out.println(r);
 			if(r == 1) {
 				save(fileChooser, primaryStage, cv, app);
 				newFile( fileChooser, primaryStage, app,mainbar,cv);
@@ -76,6 +78,8 @@ public class FileController {
 		        }
 				mainbar.updateContext(app);
 				app.setIsSaved(false);
+				Main.historique.clear();
+			    Main.save(app, cv);
 			}
 		}
 	}
@@ -90,8 +94,7 @@ public class FileController {
 
         //Show save file dialog
         File file = app.file;
-        System.out.println(file);
-        System.out.println(app.file.getAbsolutePath());
+
         
         try 
         {
@@ -139,7 +142,6 @@ public class FileController {
 		WritableImage image = cv.snapshot(new SnapshotParameters(), null);
 
        
-
 
         //Show save file dialog
         File file = fileChooser.showSaveDialog(primaryStage);
@@ -199,6 +201,8 @@ public class FileController {
 	        		app.setContext(a);
 	        		cv.update(app);
 	        		app.setIsSaved(true);
+	        		Main.historique.clear();
+	        	       Main.save(app, cv);
 	        		}
 	        		catch (Exception ex) {
 	        			ex.printStackTrace();
@@ -215,13 +219,15 @@ public class FileController {
 	            app.image = new Image(app.file.toURI().toString());
 	            cv.update(app);
 	            app.setIsSaved(true);
+	            Main.historique.clear();
+	            Main.save(app, cv);
 	        	}
 	        }
 		}
 		else {
 			WarningInput wi = new WarningInput(app, cv);
 			int r = wi.getResult();
-			System.out.println(r);
+
 			if(r == 1) {
 				save(fileChooser, primaryStage, cv, app);
 				open(fileChooser, primaryStage, cv, mainbar, app);
@@ -241,6 +247,8 @@ public class FileController {
 		        		app.setContext(a);
 		        		cv.update(app);
 		        		app.setIsSaved(true);
+		        		Main.historique.clear();
+		        	    Main.save(app, cv);
 		        		}
 		        		catch (Exception ex) {
 		        			ex.printStackTrace();
@@ -257,6 +265,8 @@ public class FileController {
 		            app.image = new Image(app.file.toURI().toString());
 		            cv.update(app);
 		            app.setIsSaved(true);
+		            Main.historique.clear();
+		            Main.save(app, cv);
 		        	}
 		        }
 			}
@@ -268,7 +278,7 @@ public class FileController {
 		if(!app.isSaved) {
 			WarningInput wi = new WarningInput(app, cv);
 			int r = wi.getResult();
-			System.out.println(r);
+
 			if(r == 1) {
 				save(fileChooser, primaryStage, cv, app);
 			

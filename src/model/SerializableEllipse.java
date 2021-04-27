@@ -6,7 +6,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import javafx.scene.shape.Ellipse;
-import javafx.scene.shape.Rectangle;
 
 public class SerializableEllipse extends Ellipse implements Serializable {
 	

@@ -1,8 +1,6 @@
 package controller;
 
 import javafx.geometry.Bounds;
-import javafx.scene.shape.Ellipse;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;

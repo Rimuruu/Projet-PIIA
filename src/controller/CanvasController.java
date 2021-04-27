@@ -1,19 +1,9 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
+import App.Main;
 import javafx.geometry.Bounds;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Ellipse;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import model.AppContext;
 import model.SerializableEllipse;
 import model.SerializableRectangle;
@@ -78,13 +68,14 @@ public class CanvasController {
 		if(intersectShape(((Shape)app.selector),x,y,app.zoom) == true) {
 			app.lastX = app.selector.getX();
 			app.lastY = app.selector.getY();
+			
 		}
 		else{
 			app.selected = null;
 			for(int i = app.composants.size()-1;i >=0;i-- ) {
 				Shape s =app.composants.get(i); 
 				if(s instanceof SerializableEllipse) {
-					System.out.println("isclicked  "+intersectEllipse((SerializableEllipse)s,x,y,app.zoom));
+	
 					if(intersectEllipse((SerializableEllipse)s,x,y,app.zoom)==true) {
 						
 						app.selected = s;
@@ -116,9 +107,10 @@ public class CanvasController {
 		
 			if(app.selected != lastSelected) {
 				app.selectedMode = "SELECT";
+				Main.save(app, cv);
+				
 			}
 		}
-		
 		cv.update(app);
 		
 		
@@ -197,7 +189,7 @@ public class CanvasController {
 		double diffY = app.selector.getY()-app.lastY;
 		double width = diffX;
 		double height = diffY;
-		System.out.println(width + " "+height);
+
 		if(app.selected!=null &&  app.selectedMode.compareTo("REDI")== 0 ) {
 			if(app.selected instanceof SerializableRectangle) {
 				SerializableRectangle r =(SerializableRectangle) app.selected;
@@ -210,9 +202,14 @@ public class CanvasController {
 				r2.setRadiusY(r2.getRadiusY()+(height));
 		
 			}
+			Main.save(app, cv);
+		}
+		if(app.selected != null && intersectShape(((Shape)app.selected),x,y,app.zoom) == true &&  app.selectedMode.compareTo("SELECT")== 0) {
+			Main.save(app, cv);
 		}
 		cv.update(app);
 	}
+
 
 	
 	
