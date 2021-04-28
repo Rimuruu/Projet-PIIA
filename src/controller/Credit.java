@@ -25,7 +25,7 @@ public class Credit extends Stage{
         titre.setLayoutY(90);
         titre.setFont(Font.font("Verdana", FontPosture.ITALIC,20));
         
-        Text texte2 = new Text("Dans le but de notre projet 2021 en Programmation des Interfaces Intéractives Avancées, nous avions eu la possibilité de créer un éditeur de photo à l'aide de JavaFX.\n");
+        Text texte2 = new Text("Dans le but de notre projet 2021 en Programmation des Interfaces Interactives Avancées, nous avions eu la possibilité de créer un éditeur de photo à l'aide de JavaFX.\n");
         
         Text titre1 = new Text("\nRemerciements:\n");
         titre1.setFont(Font.font("Verdana", FontWeight.BOLD, 15));

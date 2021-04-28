@@ -358,7 +358,7 @@ public class Main extends Application {
 		pref = new Preference();
 		screenBounds = Screen.getPrimary().getBounds();
 
-		primaryStage.setTitle("App");
+		primaryStage.setTitle("Application Éditeur photo");
 		app = new AppContext();
 		mainbar = new MainBar();
 		windowPos = new Position();
