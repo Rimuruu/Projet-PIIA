@@ -22,6 +22,7 @@ import view.MainBar;
 import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 import controller.AppController;
+import controller.Credit;
 import controller.Documentation;
 import controller.EmojiSelector;
 import controller.FileController;
@@ -293,10 +294,17 @@ public class Main extends Application {
 	            @Override
 	            public void handle(ActionEvent event) {
 
-	            
 						Documentation doc = new Documentation();
-					
 						      
+	            }
+	        });
+			
+			mainbar.menuItem62.setOnAction(new EventHandler<ActionEvent>() {
+				 
+	            @Override
+	            public void handle(ActionEvent event) {
+
+						Credit cred = new Credit();
 	            }
 	        });
 			
@@ -350,7 +358,7 @@ public class Main extends Application {
 		pref = new Preference();
 		screenBounds = Screen.getPrimary().getBounds();
 
-		primaryStage.setTitle("App");
+		primaryStage.setTitle("Application Éditeur photo");
 		app = new AppContext();
 		mainbar = new MainBar();
 		windowPos = new Position();
@@ -410,8 +418,6 @@ public class Main extends Application {
 			}
 					
 			
-				
-			
 		}
     }
 	
@@ -420,9 +426,6 @@ public class Main extends Application {
 
 		Application.launch(args);
 	}
-	
-	
-	
 	
 	
 
