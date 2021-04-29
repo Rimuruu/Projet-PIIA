@@ -30,6 +30,7 @@ public class FileController {
 	}
 	
 	public static void newFile(FileChooser fileChooser,Stage primaryStage,AppContext app,MainBar mainbar,CanvasPane cv) {
+		
 		if(app.isSaved) {
 			cv.defaultCanvas();
 			WritableImage image = cv.snapshot(new SnapshotParameters(), null);
@@ -86,6 +87,8 @@ public class FileController {
 	
 	
 	public static void save(FileChooser fileChooser,Stage primaryStage,CanvasPane cv,AppContext app) {
+		app.selected = null;
+		cv.update(app);
 		WritableImage image = cv.snapshot(new SnapshotParameters(), null);
 
 
@@ -139,6 +142,8 @@ public class FileController {
 	}
 	
 	public static void saveAs(FileChooser fileChooser,Stage primaryStage,CanvasPane cv,AppContext app) {
+		app.selected = null;
+		cv.update(app);
 		WritableImage image = cv.snapshot(new SnapshotParameters(), null);
 
        

@@ -94,6 +94,8 @@ public class CanvasPane extends Canvas {
 	    		double w = ((Rectangle) n).getWidth()*app.zoom;
 	    		double h = ((Rectangle) n).getHeight()*app.zoom;
 	    		Image i = ((ImageShape) n).i;
+	    		if(w < 0) w = 0;
+	    		if(h < 0) h = 0;
 	    		gc.drawImage(i,
 	                    x,
 	                    y,w,h); 	
@@ -106,10 +108,12 @@ public class CanvasPane extends Canvas {
 	    }
 	    else if(app.selected!=null && app.selectedMode.compareTo("REDI") == 0) {
 	    	Bounds b = app.selected.getBoundsInLocal();
+	    	
 	    	double x = app.selector.getX()*app.zoom;
     		double y = app.selector.getY()*app.zoom;
     		double w = app.selector.getWidth()*app.zoom;
     		double h = app.selector.getHeight()*app.zoom;
+	
 	    	drawRect(b.getMinX()*app.zoom,b.getMinY()*app.zoom,b.getWidth()*app.zoom,b.getHeight()*app.zoom,app.zoom);
 	    	drawSelect(x,y,w,h,app.zoom);
 	    }

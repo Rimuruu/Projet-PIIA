@@ -146,7 +146,6 @@ public class CanvasController {
 			r.setX((x/app.zoom)-(r.getWidth()/2));
 			r.setY((y/app.zoom)-(r.getHeight()/2));
 			
-			
 			if(app.selected instanceof SerializableRectangle) {
 				
 				SerializableRectangle r2 =(SerializableRectangle) app.selected;
@@ -168,10 +167,13 @@ public class CanvasController {
 				double diffY = app.selector.getY()-app.lastY;
 				double width = diffX;
 				double height = diffY;
+			
 				r2.setRadiusX(r2.getRadiusX()+width);
 				r2.setRadiusY(r2.getRadiusY()+(height));
 				app.lastX = app.selector.getX();
 				app.lastY = app.selector.getY();
+		
+			
 			}
 			app.setIsSaved(false);
 			
