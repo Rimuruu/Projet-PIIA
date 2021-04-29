@@ -41,7 +41,7 @@ public class Credit extends Stage{
         
         Text titre3 = new Text("\nImages:\n");
         titre3.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        Text texte5 = new Text("Image sans droit d'auteur sur image.net\n");
+        Text texte5 = new Text("Emoji libre de droits FLATICON\n");
         
         Text titre4 = new Text("\nCitation:\n");
         titre4.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
