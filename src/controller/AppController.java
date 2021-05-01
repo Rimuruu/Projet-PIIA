@@ -70,6 +70,8 @@ public static void Copier(AppContext app){
 	
 	app.cache = app.selected;
 }
+
+// Deecopy, on veut pas une copie du pointeur mais un objet différent ayant les même variables.
 public static Shape deepCopy(Shape s,CanvasPane cv,AppContext app) {
 	if(s instanceof SerializableEllipse) {
 		

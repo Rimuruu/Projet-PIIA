@@ -47,6 +47,7 @@ public class FiltreSelector  extends Stage{
 	
 	public FiltreSelector(AppContext app,CanvasPane cv) {
 		super(StageStyle.UTILITY);
+		// Le stage prend le dessus sur l'application on ne peut pas retourné sur le stage principal sans avoir terminé avec le secondaire.
 		this.initModality(Modality.WINDOW_MODAL);
 		this.initOwner(Main.primaryStage);
 		this.setResizable(false);

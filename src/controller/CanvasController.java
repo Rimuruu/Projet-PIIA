@@ -72,6 +72,8 @@ public class CanvasController {
 		}
 		else{
 			app.selected = null;
+			
+			// On regarde si un composants a été selectionné
 			for(int i = app.composants.size()-1;i >=0;i-- ) {
 				Shape s =app.composants.get(i); 
 				if(s instanceof SerializableEllipse) {
@@ -119,6 +121,7 @@ public class CanvasController {
 	public static void dragged(MouseEvent e,AppContext app,CanvasPane cv) {
 		double x = e.getX();
 		double y = e.getY();
+		// On déplace l'objet selectionné
 		if(app.selected != null && app.selectedMode.compareTo("SELECT")== 0 ) {
 			
 			if(intersect(app.selected,x,y,app.zoom)) {
@@ -141,6 +144,7 @@ public class CanvasController {
 			}
 			
 		}
+		// On redimensionne l'objet selectionné
 		else if(app.selected != null && app.selectedMode.compareTo("REDI")== 0 ){
 			SerializableRectangle r =(SerializableRectangle) app.selector;
 			r.setX((x/app.zoom)-(r.getWidth()/2));

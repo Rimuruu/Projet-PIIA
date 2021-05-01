@@ -35,6 +35,7 @@ public class EmojiSelector  extends Stage{
 	
 	public EmojiSelector(AppContext app,CanvasPane cv) {
 		super(StageStyle.UTILITY);
+		// Le stage prend le dessus sur l'application on ne peut pas retourné sur le stage principal sans avoir terminé avec le secondaire.
 		this.initModality(Modality.WINDOW_MODAL);
 		this.initOwner(Main.primaryStage);
 		this.setResizable(false);
@@ -81,10 +82,10 @@ public class EmojiSelector  extends Stage{
 	    b.setOnMouseClicked(e->submit(app,cv));
 	   
 	    
-        // Always show vertical scroll bar
+        // Toujours un scroll verticale
         scrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
         
-        // Horizontal scroll bar is only displayed when needed
+        // Pas de sroll horizontale
         scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
 		this.setScene(new Scene(vbox, 650, 340));
 		this.show();

@@ -34,7 +34,7 @@ public class AppContext implements Serializable{
 	public transient boolean isSaved = true;
 	protected PropertyChangeSupport propertyChangeSupport;
 	
-
+	// Copie pour l'historique
 	public AppContext deepCopy(CanvasPane cv) {
 		AppContext tmp = new AppContext();
 		tmp.selected =  deepCopyComposant(this.selected,cv,this);
@@ -106,13 +106,14 @@ public class AppContext implements Serializable{
 		this.image = a.image;
 	}
 	
+	// Chaque action modifiant le fichier modifie le statut 
 	public void setIsSaved(boolean b) {
 		boolean old = this.isSaved;
 		this.isSaved = b;
 		propertyChangeSupport.firePropertyChange("isSaved",old, b);
 	}
 	
-	
+	// Fonction appelé lors de l'écriture d'un objet AppContext d'un fichier 
 	private void writeObject(ObjectOutputStream oos)
 		    throws IOException {
 			oos.writeBoolean(image != null);
@@ -135,6 +136,7 @@ public class AppContext implements Serializable{
 				}
 		   }
 	
+	// Fonction appelé lors de la lecture d'un fichier contenant un objet AppContext
 	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException
 		{
 				
@@ -176,9 +178,6 @@ public class AppContext implements Serializable{
 	
 	
 	
-	private double valueOf(Color c) {
-		return c.getRed() + c.getGreen() + c.getBlue();
-	}
 
 
 	public void setDefaultZoom() {

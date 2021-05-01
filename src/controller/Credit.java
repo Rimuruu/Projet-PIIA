@@ -47,15 +47,13 @@ public class Credit extends Stage{
         titre4.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         Text quote = new Text("<< Dans la symbiose homme-machine, c'est l'homme qui doit s'adapter parce que la machine ne peut pas. >>\n~ Alan Jay Perlis\n");
 		
-        Hyperlink link = new Hyperlink("https://fr.tipeee.com/"); //"https://www.figma.com/file/BQOkR0X37rWD4wm674I9Fe/Projet-PIIA-%C3%A9diteur-de-photo?node-id=0%3A1"
-        link.setText("Tipeee"); // Le lien hyper texte ne marche pas.
-               
+
 		HBox hbox = new HBox(titre);
 		hbox.setStyle("-fx-background-color: #AC67B7;");
 		hbox.setPrefWidth(200);
 		hbox.setSpacing(10);
 		hbox.setAlignment(Pos.CENTER);
-		VBox vbox = new VBox(hbox,texte2,titre1,texte3,titre2,texte4,titre3,texte5,titre4,quote,link);
+		VBox vbox = new VBox(hbox,texte2,titre1,texte3,titre2,texte4,titre3,texte5,titre4,quote);
 		vbox.setPadding(new Insets(10, 10, 10, 10));
 		
 		Scene scene = new Scene(vbox);

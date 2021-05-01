@@ -22,6 +22,7 @@ public class WarningInput  extends Stage{
 	
 	public WarningInput (AppContext app,CanvasPane cv) {
 		super(StageStyle.UTILITY);
+		// Le stage prend le dessus sur l'application on ne peut pas retourné sur le stage principal sans avoir terminé avec le secondaire.
 		this.initModality(Modality.WINDOW_MODAL);
 		this.initOwner(Main.primaryStage);
 		Text l = new Text("Le fichier n'est pas sauvegardé.");

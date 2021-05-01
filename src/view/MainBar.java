@@ -89,7 +89,7 @@ public class MainBar extends HBox  implements PropertyChangeListener {
 		menuItem21 = new MenuItem("Copier");
 		menuItem22 = new MenuItem("Couper");
 		menuItem23 = new MenuItem("Coller");
-		//Menu menuItem24 = new Menu("Police");
+		//Menu menuItem24 = new Menu("Police"); pas implémenté manque de temps.
 		menuItem25 = new MenuItem("Préférence");
 		menuItem26 = new MenuItem("Annuler");
 		

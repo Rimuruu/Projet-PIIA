@@ -23,6 +23,8 @@ import view.CanvasPane;
 import view.MainBar;
 
 public class FileController {
+	
+	// Fonction qui récupère l'extension d'un fichier
 	public static Optional<String> getExtensionByStringHandling(String filename) {
 	    return Optional.ofNullable(filename)
 	      .filter(f -> f.contains("."))
@@ -30,7 +32,7 @@ public class FileController {
 	}
 	
 	public static void newFile(FileChooser fileChooser,Stage primaryStage,AppContext app,MainBar mainbar,CanvasPane cv) {
-		
+		// On vérifie si le fichier a été sauvegardé
 		if(app.isSaved) {
 			cv.defaultCanvas();
 			WritableImage image = cv.snapshot(new SnapshotParameters(), null);
@@ -54,7 +56,7 @@ public class FileController {
 		     Main.save(app, cv);
 		}
 		else {
-			WarningInput wi = new WarningInput(app, cv);
+			WarningInput wi = new WarningInput(app, cv); //On avertit l'utilisateur qu'il n'a pas sauvegardé
 			int r = wi.getResult();
 			if(r == 1) {
 				save(fileChooser, primaryStage, cv, app);
@@ -191,6 +193,7 @@ public class FileController {
 	}
 	
 	public static void open(FileChooser fileChooser,Stage primaryStage,CanvasPane cv,MainBar mainbar,AppContext app) {
+		// On vérifie si le fichier a été sauvegardé
 		if(app.isSaved) {
 			File file = fileChooser.showOpenDialog(primaryStage);
 	        if (file != null) {
@@ -230,8 +233,8 @@ public class FileController {
 	        }
 		}
 		else {
-			WarningInput wi = new WarningInput(app, cv);
-			int r = wi.getResult();
+			WarningInput wi = new WarningInput(app, cv); // On avertit l'utilisateur qu'il n'a pas sauvegardé
+			int r = wi.getResult(); 
 
 			if(r == 1) {
 				save(fileChooser, primaryStage, cv, app);
@@ -281,7 +284,7 @@ public class FileController {
 	
 	public static void close(FileChooser fileChooser,Stage primaryStage,CanvasPane cv,MainBar mainbar,AppContext app) {
 		if(!app.isSaved) {
-			WarningInput wi = new WarningInput(app, cv);
+			WarningInput wi = new WarningInput(app, cv); //On avertit l'utilisateur qu'il n'a pas sauvegardé
 			int r = wi.getResult();
 
 			if(r == 1) {

@@ -15,6 +15,7 @@ public class KeyModifier  extends Stage{
 	public KeyCode k;
 	public  KeyModifier(Stage owner,KeyCode k,String action) {
 		super(StageStyle.UTILITY);
+		// Le stage prend le dessus sur l'application on ne peut pas retourné sur le stage principal sans avoir terminé avec le secondaire.
 		this.initModality(Modality.WINDOW_MODAL);
 		this.initOwner(owner);
 		this.k = k;

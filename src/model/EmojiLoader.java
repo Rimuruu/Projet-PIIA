@@ -21,12 +21,13 @@ public class EmojiLoader {
     static final String ext = "png";
     
     public static ArrayList<Image> emojis = new ArrayList<Image>();
-
+    
+    // On veut que les images png
     static final FilenameFilter IMAGE_FILTER = new FilenameFilter() {
 
         @Override
         public boolean accept(final File dir, final String name) {
-
+        		
                 if (name.endsWith("." + ext)) {
                     return (true);
                 }

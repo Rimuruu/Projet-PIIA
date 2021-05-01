@@ -21,7 +21,7 @@ public class ShapeLoader {
     static final String ext = "png";
     
     public static HashMap<String,Image> shapes = new HashMap<String,Image>();
-
+ // On veut que les images png
     static final FilenameFilter IMAGE_FILTER = new FilenameFilter() {
 
         @Override

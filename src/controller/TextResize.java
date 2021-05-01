@@ -25,6 +25,7 @@ public class TextResize  extends Stage{
 	public TextField textField;
 	public TextResize(SerializableText text,AppContext app,CanvasPane cv) {
 		super(StageStyle.UTILITY);
+		// Le stage prend le dessus sur l'application on ne peut pas retourné sur le stage principal sans avoir terminé avec le secondaire.
 		this.initModality(Modality.WINDOW_MODAL);
 		this.initOwner(Main.primaryStage);
 		 StackPane secondaryLayout = new StackPane();

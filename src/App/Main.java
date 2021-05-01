@@ -62,9 +62,7 @@ public class Main extends Application {
 		}
 	
 	
-	 private double valueOf(Color c) {
-	        return c.getRed() + c.getGreen() + c.getBlue();
-	    }
+
 	
 	public void setController(Stage primaryStage) {
 			mainbar.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -74,6 +72,7 @@ public class Main extends Application {
 				 windowPos.y = primaryStage.getY() - mouseEvent.getScreenY();
 			  }
 			});
+			//L'utilise peut déplacé l'application avec la MainBar pluôt qu'avec la bar de windows
 			mainbar.setOnMouseDragged(new EventHandler<MouseEvent>() {
 			  @Override public void handle(MouseEvent mouseEvent) {
 				  primaryStage.setX(mouseEvent.getScreenX() + windowPos.x);
@@ -342,6 +341,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		fileChooser = new FileChooser();
+		
+		// Nos extensions
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JPEG files (*.jpeg)", "*.jpeg","*.jpg");
 		FileChooser.ExtensionFilter extFilter2 = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
 		FileChooser.ExtensionFilter extFilter3 = new FileChooser.ExtensionFilter("BMP files (*.png)", "*.bmp");
@@ -350,10 +351,10 @@ public class Main extends Application {
 		fileChooser.getExtensionFilters().add(extFilter2);
 		fileChooser.getExtensionFilters().add(extFilter3);
 		fileChooser.getExtensionFilters().add(extFilter4);
+		
 		EmojiLoader.load();
 		ShapeLoader.load();
-		//primaryStage.initStyle(StageStyle.UNDECORATED);
-		//primaryStage.setResizable(true);
+	
 		
 		pref = new Preference();
 		screenBounds = Screen.getPrimary().getBounds();
@@ -379,11 +380,15 @@ public class Main extends Application {
 		pane.setAlignment(Pos.CENTER);
 
 		
-		
+		// On utilise du css sur certain composants des vues 
 		scene.getStylesheets().add("style.css");
 		
+		//Le programme commence toujours avec une nouvelle photo vide
 		FileController.newFile(fileChooser, primaryStage, app,mainbar,cv);
+		
+		// Prévention avant de fermer le programme
 		primaryStage.setOnHiding( event -> {FileController.close(fileChooser, primaryStage, cv, mainbar, app);} );
+		
 		this.primaryStage = primaryStage;
 		primaryStage.setScene(scene);
 		setController(primaryStage);
@@ -398,9 +403,8 @@ public class Main extends Application {
 	
 	public void keyHandler(KeyEvent event) {
 
-
+		// Les raccourcis
 		if(event.isControlDown()) {
-			
 			if(event.getCode() == Preference.ANNULER) {
 				annuler(cv);
 			}
