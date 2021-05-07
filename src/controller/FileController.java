@@ -162,7 +162,7 @@ public class FileController {
             	if(ext.equals("jpeg")) {
             		 BufferedImage awtImage = new BufferedImage((int)image.getWidth(), (int)image.getHeight(), BufferedImage.TYPE_INT_RGB);
             		 ImageIO.write(SwingFXUtils.fromFXImage(image,awtImage), "JPEG", file);
-            		 app.setIsSaved(true);
+            		 if(file.getAbsolutePath().equals(app.file.getAbsolutePath())) app.setIsSaved(true);
             	}
             	else if (ext.equals("ph")) {
             		ObjectOutputStream oos = null;
@@ -171,7 +171,7 @@ public class FileController {
             		    fout = new FileOutputStream(file.getAbsolutePath(), false);
             		    oos = new ObjectOutputStream(fout);
             		    oos.writeObject(app);
-            		    app.setIsSaved(true);
+            		    if(file.getAbsolutePath().equals(app.file.getAbsolutePath())) app.setIsSaved(true);
             		} catch (Exception ex) {
             		    ex.printStackTrace();
             		} finally {
@@ -182,7 +182,7 @@ public class FileController {
             	}
             	else {
             		ImageIO.write(SwingFXUtils.fromFXImage(image, null), ext, file);
-            		app.setIsSaved(true);
+            		if(file.getAbsolutePath().equals(app.file.getAbsolutePath())) app.setIsSaved(true);
             	}
                 
             }

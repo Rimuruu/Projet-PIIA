@@ -20,7 +20,8 @@ public class CanvasController {
 		double cy = c.getCenterY()*zoom;
 		double rx = c.getRadiusX()*zoom;
 		double ry = c.getRadiusY()*zoom;
-		return (Math.pow((x - cx),2) + Math.pow((y - cy),2)) < Math.pow(rx,2);
+	
+		return ((Math.pow((x - cx),2)/Math.pow(rx,2)) + (Math.pow((y - cy),2)/Math.pow(ry,2)) ) <= 1;
 	}
 	public static Boolean intersectRectangle(SerializableRectangle r,double x,double y,double zoom) {
 		double rx = r.getX()*zoom;

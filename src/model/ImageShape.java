@@ -31,6 +31,17 @@ public class ImageShape extends SerializableRectangle implements Serializable{
 		
 	}
 	
+	public ImageShape( Image i,double width, double height,double x, double y) {
+		super(width,height);
+		this.i = i;
+		this.setX(x);
+		this.setY(y);
+
+		
+		
+		
+	}
+	
 	private void writeObject(ObjectOutputStream oos)
 		    throws IOException {
 					oos.writeBoolean(i != null);

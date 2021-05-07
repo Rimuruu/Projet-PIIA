@@ -94,7 +94,7 @@ public static Shape deepCopy(Shape s,CanvasPane cv,AppContext app) {
 	}
 	else if(s instanceof ImageShape) {
 		ImageShape image = (ImageShape) s;
-		ImageShape copy = new ImageShape(image.i,image.getWidth(),image.getHeight());
+		ImageShape copy = new ImageShape(image.i,image.getWidth(),image.getHeight(),((cv.getWidth()/app.zoom)/2), ((cv.getHeight()/app.zoom)/2));
 		return copy;
 	}
 	return null;
